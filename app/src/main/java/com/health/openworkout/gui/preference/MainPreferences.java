@@ -128,12 +128,6 @@ public class MainPreferences extends PreferenceFragmentCompat {
                 return true;
             }
         });
-
-        if (BuildConfig.FLAVOR == "fdroid") {
-            prefRemoveAd.setVisible(false);
-        } else {
-            prefRemoveAd.setVisible(true);
-        }
     }
 
     @Override
