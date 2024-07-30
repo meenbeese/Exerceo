@@ -38,7 +38,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
 import com.health.openworkout.core.OpenWorkout;
-import com.health.openworkout.core.utils.PlayStoreUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -83,10 +82,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        if (!PlayStoreUtils.getInstance().isAdRemovalPaid()) {
-            PlayStoreUtils.getInstance().initMobileAds(this);
-        }
 
         OpenWorkout.getInstance().initTrainingPlans();
     }
