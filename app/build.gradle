@@ -129,10 +129,4 @@ dependencies {
 
     // Debug SQL DB use adb forward tcp:8080 tcp:8080 --> localhost:8080
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
-
-    // Ad sense
-    playStoreImplementation 'com.google.android.gms:play-services-ads:19.5.0'
-
-    // Google billing
-    playStoreImplementation 'com.android.billingclient:billing:3.0.1'
 }
