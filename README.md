@@ -12,14 +12,14 @@ Simple workout trainer that puts your privacy first
 
 # Features
 
-* Pre configured 7 minutes workout plan and beginners training plan
-* Animated selectable female and male character
+* Pre-configured 7-minute workout plan and beginner training plan
+* Animated selectable female and male characters
 * Detailed information for each exercise
 * Integrated workout reminder function
-* Doesn't require you to create an account,
-* Respects your privacy 
-* Add your own individual training plan and workout items
-* Full configuable workout items
+* Does not require you to create an account.
+* Respects your privacy
+* Add your own individual training plan and workout items.
+* Fully configurable workout items
 * Optional dark theme selectable
 
 # Donations

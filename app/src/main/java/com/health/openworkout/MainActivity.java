@@ -101,11 +101,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAboutDialog() {
-        final SpannableString abouotMsg = new SpannableString(getResources().getString(R.string.label_about_info));
+        final SpannableString aboutMsg = new SpannableString(getResources().getString(R.string.label_about_info));
 
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(getResources().getString(R.string.app_name) + " " + String.format("v%s (%d)", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE))
-                .setMessage(abouotMsg)
+                .setMessage(aboutMsg)
                 .setIcon(R.drawable.ic_openworkout)
                 .setPositiveButton(getResources().getString(R.string.label_ok), null)
                 .create();
