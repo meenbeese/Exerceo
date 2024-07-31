@@ -53,7 +53,8 @@ If you would like to support this project's further development, the creator of 
 
 # License
 
-    Copyright (C) 2020 olie.xdev <olie.xdev@googlemail.com>
+```
+    Copyright (C) 2024 Meenbeese
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -66,4 +67,5 @@ If you would like to support this project's further development, the creator of 
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+```
