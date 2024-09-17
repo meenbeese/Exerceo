@@ -107,9 +107,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    // Debug SQL DB use adb forward tcp:8080 tcp:8080 --> localhost:8080
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
-
     // Misc
     implementation 'cat.ereza:customactivityoncrash:2.2.0'
 }
