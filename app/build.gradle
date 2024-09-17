@@ -29,8 +29,8 @@ android {
             def keystoreProperties = new Properties()
             try {
                 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-            } catch(FileNotFoundException ex) {
-                keystoreProperties = null;
+            } catch (FileNotFoundException ignored) {
+                keystoreProperties = null
             }
 
             if (keystoreProperties != null) {
@@ -44,22 +44,16 @@ android {
 
     buildTypes {
         release {
-            debuggable false
             shrinkResources true
             minifyEnabled true
-            // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles(
+                getDefaultProguardFile('proguard-android-optimize.txt'),
+                'proguard-rules.pro'
+            )
         }
-
         debug {
             debuggable true
-            // don't include version number into the apk filename for debug build type so GitHub CI can find it
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    if (variant.buildType.name == "debug") {
-                        outputFileName = "openWorkout-debug.apk"
-                    }
-                }
-            }
+            applicationIdSuffix '.debug'
         }
     }
 
@@ -79,7 +73,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Google libraries
+    // Google
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.preference:preference:1.1.1'
@@ -89,23 +83,20 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
 
-    // Retrofit2
+    // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.8.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.8.1'
 
     // GSon
     implementation 'com.google.code.gson:gson:2.8.5'
 
-    // CustomActivityOnCrash
-    implementation 'cat.ereza:customactivityoncrash:2.2.0'
-
-    // Timber log library
+    // Timber
     implementation 'com.jakewharton.timber:timber:4.7.1'
 
-    // Room library
+    // Room DB
     implementation 'androidx.room:room-runtime:2.2.5'
 
-    // Test environment
+    // Test
     annotationProcessor 'androidx.room:room-compiler:2.2.5'
     testImplementation 'junit:junit:4.13'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
@@ -113,4 +104,7 @@ dependencies {
 
     // Debug SQL DB use adb forward tcp:8080 tcp:8080 --> localhost:8080
     debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
+    // Misc
+    implementation 'cat.ereza:customactivityoncrash:2.2.0'
 }
