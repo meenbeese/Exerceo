@@ -52,13 +52,10 @@ public class TrophyFragment extends Fragment {
         soundUtils = OpenWorkout.getInstance().getSoundUtils();
         soundUtils.playSound(SoundUtils.SOUND.SESSION_COMPLETED);
 
-        okView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp();
-            }
+        okView.setOnClickListener(v -> {
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp();
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp();
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigateUp();
         });
 
         return root;

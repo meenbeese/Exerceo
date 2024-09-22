@@ -108,41 +108,27 @@ public abstract class GenericAdapter<VH extends GenericAdapter.ViewHolder> exten
             popupMenu.setOnMenuItemClickListener(this);
             popupMenu.getMenuInflater().inflate(R.menu.item_menu, popupMenu.getMenu());
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onDefaultClickListener != null) {
-                        onDefaultClickListener.onItemClick(getAdapterPosition(), v);
-                    }
+            itemView.setOnClickListener(v -> {
+                if (onDefaultClickListener != null) {
+                    onDefaultClickListener.onItemClick(getAdapterPosition(), v);
                 }
             });
 
-            optionView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    popupMenu.show();
+            optionView.setOnClickListener(v -> popupMenu.show());
+
+            editView.setOnClickListener(v -> {
+                if (onEditClickListener != null) {
+                    onEditClickListener.onItemClick(getAdapterPosition(), v);
                 }
             });
 
-            editView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (onEditClickListener != null) {
-                        onEditClickListener.onItemClick(getAdapterPosition(), v);
+            reorderView.setOnTouchListener((v, event) -> {
+                if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+                    if (onReorderClickListener != null) {
+                        onReorderClickListener.onItemClick(getAdapterPosition(), v);
                     }
                 }
-            });
-
-            reorderView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-                        if (onReorderClickListener != null) {
-                            onReorderClickListener.onItemClick(getAdapterPosition(), v);
-                        }
-                    }
-                    return false;
-                }
+                return false;
             });
         }
 

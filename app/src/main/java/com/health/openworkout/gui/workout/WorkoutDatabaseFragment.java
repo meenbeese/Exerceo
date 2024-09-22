@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.WorkoutItem;
-import com.health.openworkout.gui.datatypes.GenericAdapter;
 import com.health.openworkout.gui.datatypes.GenericSettingsFragment;
 
 import java.util.List;
@@ -44,18 +43,15 @@ public class WorkoutDatabaseFragment extends Fragment {
 
         workoutsDatabaseAdapter = new WorkoutsDatabaseAdapter(getContext(), workoutItemList);
 
-        workoutsDatabaseAdapter.setOnItemClickListener(new GenericAdapter.OnGenericClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-                final long workoutSessionId = WorkoutFragmentArgs.fromBundle(getArguments()).getSessionWorkoutId();
+        workoutsDatabaseAdapter.setOnItemClickListener((position, v) -> {
+            final long workoutSessionId = WorkoutFragmentArgs.fromBundle(getArguments()).getSessionWorkoutId();
 
-                WorkoutDatabaseFragmentDirections.ActionWorkoutDatabaseFragmentToWorkoutSettingsFragment action = WorkoutDatabaseFragmentDirections.actionWorkoutDatabaseFragmentToWorkoutSettingsFragment();
-                action.setMode(GenericSettingsFragment.SETTING_MODE.ADD);
-                action.setTitle(getString(R.string.label_add));
-                action.setSessionWorkoutId(workoutSessionId);
-                action.setWorkoutItemId(workoutItemList.get(position).getWorkoutItemId());
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-            }
+            WorkoutDatabaseFragmentDirections.ActionWorkoutDatabaseFragmentToWorkoutSettingsFragment action = WorkoutDatabaseFragmentDirections.actionWorkoutDatabaseFragmentToWorkoutSettingsFragment();
+            action.setMode(GenericSettingsFragment.SETTING_MODE.ADD);
+            action.setTitle(getString(R.string.label_add));
+            action.setSessionWorkoutId(workoutSessionId);
+            action.setWorkoutItemId(workoutItemList.get(position).getWorkoutItemId());
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
         });
 
         workoutsView.setAdapter(workoutsDatabaseAdapter);

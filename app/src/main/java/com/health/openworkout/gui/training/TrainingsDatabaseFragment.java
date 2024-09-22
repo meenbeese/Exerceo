@@ -17,7 +17,6 @@ import com.health.openworkout.R;
 import com.health.openworkout.core.datatypes.GitHubFile;
 import com.health.openworkout.core.datatypes.TrainingPlan;
 import com.health.openworkout.core.utils.PackageUtils;
-import com.health.openworkout.gui.datatypes.GenericAdapter;
 
 import java.io.File;
 import java.util.List;
@@ -56,13 +55,10 @@ public class TrainingsDatabaseFragment extends Fragment {
                 gitHubFileList = receivedGitHubFileList;
                 trainingDatabaseAdapter = new TrainingDatabaseAdapter(getContext(), gitHubFileList);
 
-                trainingDatabaseAdapter.setOnItemClickListener(new GenericAdapter.OnGenericClickListener() {
-                    @Override
-                    public void onItemClick(int position, View v) {
-                        GitHubFile gitHubFile = gitHubFileList.get(position);
-                        packageUtils.downloadFile(gitHubFile);
-                        trainingDatabaseAdapter.notifyItemChanged(position);
-                    }
+                trainingDatabaseAdapter.setOnItemClickListener((position, v) -> {
+                    GitHubFile gitHubFile = gitHubFileList.get(position);
+                    packageUtils.downloadFile(gitHubFile);
+                    trainingDatabaseAdapter.notifyItemChanged(position);
                 });
 
                 trainingsView.setAdapter(trainingDatabaseAdapter);
@@ -71,13 +67,10 @@ public class TrainingsDatabaseFragment extends Fragment {
 
             @Override
             public void onGitHubDownloadFile(File filename) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        TrainingPlan trainingPlan = packageUtils.importTrainingPlan(filename);
+                getActivity().runOnUiThread(() -> {
+                    TrainingPlan trainingPlan = packageUtils.importTrainingPlan(filename);
 
-                        trainingDatabaseAdapter.downloadCompleted(trainingPlan);
-                    }
+                    trainingDatabaseAdapter.downloadCompleted(trainingPlan);
                 });
             }
 

@@ -1,7 +1,6 @@
 package com.health.openworkout.gui.session;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.InputType;
@@ -66,61 +65,51 @@ public class SessionFragment extends GenericFragment {
         animFabClock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_clock);
         animFabAntiClock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_anticlock);
 
-        expandableButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExpandable) {
-                    addLayout.setVisibility(View.GONE);
-                    addLayout.startAnimation(animFabClose);
-                    expandableButton.startAnimation(animFabAntiClock);
-                    isExpandable = false;
-                } else {
-                    addLayout.setVisibility(View.VISIBLE);
-                    addLayout.startAnimation(animFabOpen);
-                    expandableButton.startAnimation(animFabClock);
-                    isExpandable = true;
-                }
+        expandableButton.setOnClickListener(v -> {
+            if (isExpandable) {
+                addLayout.setVisibility(View.GONE);
+                addLayout.startAnimation(animFabClose);
+                expandableButton.startAnimation(animFabAntiClock);
+                isExpandable = false;
+            } else {
+                addLayout.setVisibility(View.VISIBLE);
+                addLayout.startAnimation(animFabOpen);
+                expandableButton.startAnimation(animFabClock);
+                isExpandable = true;
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
-                alert.setTitle(getString(R.string.label_input_create_days));
-                final EditText input = new EditText(getContext());
-                input.setText("3", TextView.BufferType.EDITABLE);
-                input.setInputType(InputType.TYPE_CLASS_NUMBER);
-                input.setRawInputType(Configuration.KEYBOARD_12KEY);
-                alert.setView(input);
-                alert.setPositiveButton(getString(R.string.label_ok), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        if (!input.getText().toString().isEmpty()) {
-                            int startNr = trainingPlan.getWorkoutSessions().size() + 1;
-                            int offsetNr = Integer.valueOf(input.getText().toString());
+        addButton.setOnClickListener(v -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
+            alert.setTitle(getString(R.string.label_input_create_days));
+            final EditText input = new EditText(getContext());
+            input.setText("3", TextView.BufferType.EDITABLE);
+            input.setInputType(InputType.TYPE_CLASS_NUMBER);
+            input.setRawInputType(Configuration.KEYBOARD_12KEY);
+            alert.setView(input);
+            alert.setPositiveButton(getString(R.string.label_ok), (dialog, whichButton) -> {
+                if (!input.getText().toString().isEmpty()) {
+                    int startNr = trainingPlan.getWorkoutSessions().size() + 1;
+                    int offsetNr = Integer.valueOf(input.getText().toString());
 
-                            for (int nr=startNr; nr < (startNr + offsetNr); nr++) {
-                                WorkoutSession workoutSession = new WorkoutSession();
-                                workoutSession.setName(String.format(getString(R.string.day_unit), nr));
-                                workoutSession.setTrainingPlanId(trainingPlan.getTrainingPlanId());
-                                workoutSession.setOrderNr(nr);
-                                trainingPlan.addWorkoutSession(workoutSession);
-                                OpenWorkout.getInstance().insertWorkoutSession(workoutSession);
-                                getAdapter().notifyItemInserted(nr);
-                                sessionsView.scrollToPosition(startNr);
-                            }
+                    for (int nr=startNr; nr < (startNr + offsetNr); nr++) {
+                        WorkoutSession workoutSession = new WorkoutSession();
+                        workoutSession.setName(String.format(getString(R.string.day_unit), nr));
+                        workoutSession.setTrainingPlanId(trainingPlan.getTrainingPlanId());
+                        workoutSession.setOrderNr(nr);
+                        trainingPlan.addWorkoutSession(workoutSession);
+                        OpenWorkout.getInstance().insertWorkoutSession(workoutSession);
+                        getAdapter().notifyItemInserted(nr);
+                        sessionsView.scrollToPosition(startNr);
+                    }
 
-                            loadFromDatabase();
-                        }
-                    }
-                });
-                alert.setNegativeButton(getString(R.string.label_cancel), new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // empty
-                    }
-                });
-                alert.show();
-            }
+                    loadFromDatabase();
+                }
+            });
+            alert.setNegativeButton(getString(R.string.label_cancel), (dialog, whichButton) -> {
+                // empty
+            });
+            alert.show();
         });
 
         loadFromDatabase();

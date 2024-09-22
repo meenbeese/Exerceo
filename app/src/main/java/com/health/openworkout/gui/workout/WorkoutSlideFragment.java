@@ -26,7 +26,6 @@ import android.widget.VideoView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
@@ -45,7 +44,7 @@ import java.util.Calendar;
 import timber.log.Timber;
 
 public class WorkoutSlideFragment extends Fragment {
-    private enum WORKOUT_STATE {INIT, PREPARE, START, BREAK, FINISH};
+    private enum WORKOUT_STATE {INIT, PREPARE, START, BREAK, FINISH}
     private ConstraintLayout constraintLayout;
     private TextView nameView;
     private CardView videoCardView;
@@ -114,46 +113,32 @@ public class WorkoutSlideFragment extends Fragment {
             videoCardView.setLayoutParams(layoutParams);
         }
 
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
-                mp.setLooping(true);
+        videoView.setOnPreparedListener(mp -> {
+            mp.setVideoScalingMode(MediaPlayer.VIDEO_SCALING_MODE_SCALE_TO_FIT_WITH_CROPPING);
+            mp.setLooping(true);
+        });
+
+        infoView.setOnClickListener(v -> {
+            if (descriptionView.getVisibility() == View.GONE) {
+                descriptionView.setVisibility(View.VISIBLE);
+            } else {
+                descriptionView.setVisibility(View.GONE);
             }
         });
 
-        infoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (descriptionView.getVisibility() == View.GONE) {
-                    descriptionView.setVisibility(View.VISIBLE);
+        nextWorkoutStepView.setOnClickListener(v -> nextWorkoutState());
+
+        playResumeView.setOnClickListener(v -> {
+            // if rep mode and in running workout state then ignore any clicks
+            if (!nextWorkoutItem.isTimeMode() && workoutState == WORKOUT_STATE.START) {
+                return;
+            }
+
+            if (countDownTimer != null) {
+                if (isCountdownTimerStopped) {
+                    resumeCountdownTimer();
                 } else {
-                    descriptionView.setVisibility(View.GONE);
-                }
-            }
-        });
-
-        nextWorkoutStepView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                nextWorkoutState();
-            }
-        });
-
-        playResumeView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // if rep mode and in running workout state then ignore any clicks
-                if (!nextWorkoutItem.isTimeMode() && workoutState == WORKOUT_STATE.START) {
-                    return;
-                }
-
-                if (countDownTimer != null) {
-                    if (isCountdownTimerStopped) {
-                        resumeCountdownTimer();
-                    } else {
-                        pauseCountdownTimer();
-                    }
+                    pauseCountdownTimer();
                 }
             }
         });
@@ -409,12 +394,7 @@ public class WorkoutSlideFragment extends Fragment {
 
             if (workoutItem.getWorkoutItemId() == nextWorkoutItem.getWorkoutItemId()) {
                 overviewWorkoutItemEntry.setHighlight();
-                new Handler().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollView.smoothScrollTo(0, overviewWorkoutItemEntry.getTop()-50);
-                    }
-                });
+                new Handler().post(() -> scrollView.smoothScrollTo(0, overviewWorkoutItemEntry.getTop()-50));
             }
         }
     }
@@ -569,11 +549,6 @@ public class WorkoutSlideFragment extends Fragment {
             }
         };
 
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                countDownTimer.start();
-            }
-        });
+        getActivity().runOnUiThread(() -> countDownTimer.start());
     }
 }

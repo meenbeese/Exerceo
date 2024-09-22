@@ -41,12 +41,7 @@ public class TrainingSettingsFragment extends GenericSettingsFragment {
 
         fileDialogHelper = new FileDialogHelper(this);
 
-        imgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fileDialogHelper.openImageFileDialog();
-            }
-        });
+        imgView.setOnClickListener(v -> fileDialogHelper.openImageFileDialog());
 
         setMode(TrainingSettingsFragmentArgs.fromBundle(getArguments()).getMode());
 

@@ -44,28 +44,25 @@ public class HomeFragment extends Fragment {
 
         startView = root.findViewById(R.id.startView);
 
-        startView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                userTrainingPlan = openWorkout.getTrainingPlan(user.getTrainingsPlanId());
+        startView.setOnClickListener(v -> {
+            userTrainingPlan = openWorkout.getTrainingPlan(user.getTrainingsPlanId());
 
-                if (userTrainingPlan != null) {
-                    WorkoutSession nextUserWorkoutSession = userTrainingPlan.getNextWorkoutSession();
-                    if (nextUserWorkoutSession != null) {
-                        if (!nextUserWorkoutSession.getWorkoutItems().isEmpty()) {
-                            HomeFragmentDirections.ActionHomeFragmentToWorkoutFragmentSlide action = HomeFragmentDirections.actionHomeFragmentToWorkoutFragmentSlide();
-                            action.setTitle(nextUserWorkoutSession.getName());
-                            action.setSessionWorkoutId(nextUserWorkoutSession.getWorkoutSessionId());
-                            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-                        } else {
-                            Toast.makeText(getContext(), String.format(getString(R.string.error_no_workout_items), nextUserWorkoutSession.getName()), Toast.LENGTH_SHORT).show();
-                        }
+            if (userTrainingPlan != null) {
+                WorkoutSession nextUserWorkoutSession = userTrainingPlan.getNextWorkoutSession();
+                if (nextUserWorkoutSession != null) {
+                    if (!nextUserWorkoutSession.getWorkoutItems().isEmpty()) {
+                        HomeFragmentDirections.ActionHomeFragmentToWorkoutFragmentSlide action = HomeFragmentDirections.actionHomeFragmentToWorkoutFragmentSlide();
+                        action.setTitle(nextUserWorkoutSession.getName());
+                        action.setSessionWorkoutId(nextUserWorkoutSession.getWorkoutSessionId());
+                        Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
                     } else {
-                        Toast.makeText(getContext(), String.format(getString(R.string.error_no_sessions), userTrainingPlan.getName()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), String.format(getString(R.string.error_no_workout_items), nextUserWorkoutSession.getName()), Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getContext(), R.string.error_no_trainings, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), String.format(getString(R.string.error_no_sessions), userTrainingPlan.getName()), Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(getContext(), R.string.error_no_trainings, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -126,22 +123,19 @@ public class HomeFragment extends Fragment {
             avatarGroup.check(R.id.radioFemale);
         }
 
-        avatarGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                int checkedRadioId = group.getCheckedRadioButtonId();
+        avatarGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            int checkedRadioId = group.getCheckedRadioButtonId();
 
-                switch (checkedRadioId) {
-                    case R.id.radioMale:
-                        user.setMale(true);
-                        break;
-                    case R.id.radioFemale:
-                        user.setMale(false);
-                        break;
-                }
-
-                openWorkout.updateUser(user);
+            switch (checkedRadioId) {
+                case R.id.radioMale:
+                    user.setMale(true);
+                    break;
+                case R.id.radioFemale:
+                    user.setMale(false);
+                    break;
             }
+
+            openWorkout.updateUser(user);
         });
 
         detailTrainingView.setOnClickListener(new View.OnClickListener() {
@@ -158,13 +152,8 @@ public class HomeFragment extends Fragment {
     }
 
     private void updateProgressBar(TrainingPlan trainingPlan) {
-        sessionView.setText("(" + Integer.toString(trainingPlan.finishedSessionSize()) + "/" + trainingPlan.getWorkoutSessionSize()+")");
+        sessionView.setText("(" + trainingPlan.finishedSessionSize() + "/" + trainingPlan.getWorkoutSessionSize()+")");
         sessionProgressBar.setMax(trainingPlan.getWorkoutSessionSize());
-        sessionProgressBar.post(new Runnable() {
-            @Override
-            public void run() {
-                sessionProgressBar.setProgress(trainingPlan.finishedSessionSize());
-            }
-        });
+        sessionProgressBar.post(() -> sessionProgressBar.setProgress(trainingPlan.finishedSessionSize()));
     }
 }

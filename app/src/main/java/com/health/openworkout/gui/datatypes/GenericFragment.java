@@ -74,8 +74,8 @@ public abstract class GenericFragment extends Fragment {
     protected abstract void onDuplicateCallback(int position);
     protected abstract void onDeleteCallback(int position);
     protected abstract void onResetClick();
-    protected void onPublishClick(int position) {};
-    protected void onExportClick(int position) {};
+    protected void onPublishClick(int position) {}
+    protected void onExportClick(int position) {}
 
     private ProgressBar getProgressBar() {
         if (getView() != null) {
@@ -117,12 +117,9 @@ public abstract class GenericFragment extends Fragment {
         if (mode == GenericFragment.FRAGMENT_MODE.VIEW) {
             touchHelper.attachToRecyclerView(null);
 
-            getAdapter().setOnItemClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(int position, View v) {
-                    if (position != -1) {
-                        onSelectCallback(position);
-                    }
+            getAdapter().setOnItemClickListener((position, v) -> {
+                if (position != -1) {
+                    onSelectCallback(position);
                 }
             });
         }
@@ -132,74 +129,56 @@ public abstract class GenericFragment extends Fragment {
 
             touchHelper.attachToRecyclerView(getRecyclerView());
 
-            getAdapter().setOnItemEditClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(int position, View v) {
-                    if (position != -1) {
-                        onEditCallback(position);
-                    }
+            getAdapter().setOnItemEditClickListener((position, v) -> {
+                if (position != -1) {
+                    onEditCallback(position);
                 }
             });
 
-            getAdapter().setOnItemDuplicateClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(final int position, View v) {
-                    if (position != -1) {
-                        getProgressBar().setVisibility(View.VISIBLE);
-                        getAdapter().notifyItemInserted(position+1);
-                        new AsyncTask<Void, Void, Void>() {
-                            @Override
-                            protected Void doInBackground(Void ... params) {
-                                onDuplicateCallback(position);
-                                return null;
+            getAdapter().setOnItemDuplicateClickListener((position, v) -> {
+                if (position != -1) {
+                    getProgressBar().setVisibility(View.VISIBLE);
+                    getAdapter().notifyItemInserted(position+1);
+                    new AsyncTask<Void, Void, Void>() {
+                        @Override
+                        protected Void doInBackground(Void ... params) {
+                            onDuplicateCallback(position);
+                            return null;
+                        }
+
+                        @Override
+                        protected void onPostExecute(Void o) {
+                            if (getProgressBar() != null) {
+                                getProgressBar().setVisibility(View.GONE);
                             }
-
-                            @Override
-                            protected void onPostExecute(Void o) {
-                                if (getProgressBar() != null) {
-                                    getProgressBar().setVisibility(View.GONE);
-                                }
-                            }
-                        }.execute();
-                    }
+                        }
+                    }.execute();
                 }
             });
 
-            getAdapter().setOnItemDeleteClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(int position, View v) {
-                    if (position != -1) {
-                        getAdapter().notifyItemRemoved(position);
+            getAdapter().setOnItemDeleteClickListener((position, v) -> {
+                if (position != -1) {
+                    getAdapter().notifyItemRemoved(position);
 
-                        onDeleteCallback(position);
-                    }
+                    onDeleteCallback(position);
                 }
             });
 
-            getAdapter().setOnItemReorderClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(int position, View v) {
-                    if (position != -1) {
-                        touchHelper.startDrag(getRecyclerView().findViewHolderForLayoutPosition(position));
-                    }
+            getAdapter().setOnItemReorderClickListener((position, v) -> {
+                if (position != -1) {
+                    touchHelper.startDrag(getRecyclerView().findViewHolderForLayoutPosition(position));
                 }
             });
 
-            getAdapter().setOnItemPublishClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(int position, View v) {
-                    if (position != -1) {
-                        onPublishClick(position);
-                    }
+            getAdapter().setOnItemPublishClickListener((position, v) -> {
+                if (position != -1) {
+                    onPublishClick(position);
                 }
             });
 
-            getAdapter().setOnItemExportClickListener(new GenericAdapter.OnGenericClickListener() {
-                @Override
-                public void onItemClick(int position, View v) {
-                    if (position != -1) {
-                        onExportClick(position);
-                    }
+            getAdapter().setOnItemExportClickListener((position, v) -> {
+                if (position != -1) {
+                    onExportClick(position);
                 }
             });
         }
@@ -225,34 +204,31 @@ public abstract class GenericFragment extends Fragment {
             case R.id.reset:
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-                DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which){
-                            case DialogInterface.BUTTON_POSITIVE:
-                                getProgressBar().setVisibility(View.VISIBLE);
-                                new AsyncTask<Void, Void, Void>() {
-                                    @Override
-                                    protected Void doInBackground(Void ... params) {
-                                        onResetClick();
-                                        return null;
-                                    }
+                DialogInterface.OnClickListener dialogClickListener = (dialog, which) -> {
+                    switch (which){
+                        case DialogInterface.BUTTON_POSITIVE:
+                            getProgressBar().setVisibility(View.VISIBLE);
+                            new AsyncTask<Void, Void, Void>() {
+                                @Override
+                                protected Void doInBackground(Void ... params) {
+                                    onResetClick();
+                                    return null;
+                                }
 
-                                    @Override
-                                    protected void onPostExecute(Void o) {
-                                        if (getProgressBar() != null) {
-                                            getProgressBar().setVisibility(View.GONE);
-                                        }
-                                        loadFromDatabase();
-
-                                        Toast.makeText(getActivity(), String.format(getString(R.string.label_reset_toast), getTitle()), Toast.LENGTH_SHORT).show();
+                                @Override
+                                protected void onPostExecute(Void o) {
+                                    if (getProgressBar() != null) {
+                                        getProgressBar().setVisibility(View.GONE);
                                     }
-                                }.execute();
-                                break;
-                            case DialogInterface.BUTTON_NEGATIVE:
-                                //No button clicked
-                                break;
-                        }
+                                    loadFromDatabase();
+
+                                    Toast.makeText(getActivity(), String.format(getString(R.string.label_reset_toast), getTitle()), Toast.LENGTH_SHORT).show();
+                                }
+                            }.execute();
+                            break;
+                        case DialogInterface.BUTTON_NEGATIVE:
+                            //No button clicked
+                            break;
                     }
                 };
 

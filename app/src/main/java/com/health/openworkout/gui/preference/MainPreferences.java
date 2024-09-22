@@ -47,69 +47,54 @@ public class MainPreferences extends PreferenceFragmentCompat {
         fileDialogHelper = new FileDialogHelper(this);
 
         final SwitchPreferenceCompat prefDarkTheme = findPreference("darkTheme");
-        prefDarkTheme.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (!prefDarkTheme.isChecked()) {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
-                } else {
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-                }
-                return true;
+        prefDarkTheme.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (!prefDarkTheme.isChecked()) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             }
+            return true;
         });
 
         final Preference prefReminder = findPreference("reminder");
-        prefReminder.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                NavDirections action = MainPreferencesDirections.actionMainPreferencesFragmentToReminderPreferencesFragment();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-                return true;
-            }
+        prefReminder.setOnPreferenceClickListener(preference -> {
+            NavDirections action = MainPreferencesDirections.actionMainPreferencesFragmentToReminderPreferencesFragment();
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
+            return true;
         });
 
         final Preference prefSound= findPreference("sound");
-        prefSound.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                NavDirections action = MainPreferencesDirections.actionMainPreferencesFragmentToSoundPreferencesFragment();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-                return true;
-            }
+        prefSound.setOnPreferenceClickListener(preference -> {
+            NavDirections action = MainPreferencesDirections.actionMainPreferencesFragmentToSoundPreferencesFragment();
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
+            return true;
         });
 
         final SwitchPreferenceCompat prefDebugLogging = findPreference("debugLogging");
         prefDebugLogging.setChecked(getEnabledFileDebugTree() != null);
-        prefDebugLogging.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(Preference preference, Object newValue) {
-                if (!prefDebugLogging.isChecked()) {
-                    DateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
-                    String fileName = String.format("openWorkout_%s.txt", format.format(new Date()));
+        prefDebugLogging.setOnPreferenceChangeListener((preference, newValue) -> {
+            if (!prefDebugLogging.isChecked()) {
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd_HH-mm");
+                String fileName = String.format("openWorkout_%s.txt", format.format(new Date()));
 
-                    fileDialogHelper.openDebugFileDialog(fileName);
-                } else {
-                    FileDebugTree tree = getEnabledFileDebugTree();
-                    if (tree != null) {
-                        Timber.d("Debug log disabled");
-                        Timber.uproot(tree);
-                        tree.close();
-                    }
+                fileDialogHelper.openDebugFileDialog(fileName);
+            } else {
+                FileDebugTree tree = getEnabledFileDebugTree();
+                if (tree != null) {
+                    Timber.d("Debug log disabled");
+                    Timber.uproot(tree);
+                    tree.close();
                 }
-
-                return true;
             }
+
+            return true;
         });
 
         final Preference prefRemoveAd = findPreference("removeAd");
-        prefRemoveAd.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                NavDirections action = MainPreferencesDirections.actionMainPreferencesFragmentToBillingFragment();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-                return true;
-            }
+        prefRemoveAd.setOnPreferenceClickListener(preference -> {
+            NavDirections action = MainPreferencesDirections.actionMainPreferencesFragmentToBillingFragment();
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
+            return true;
         });
     }
 

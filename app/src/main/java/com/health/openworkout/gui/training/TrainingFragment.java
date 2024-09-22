@@ -1,6 +1,5 @@
 package com.health.openworkout.gui.training;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -78,55 +77,41 @@ public class TrainingFragment extends GenericFragment {
         animFabClock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_clock);
         animFabAntiClock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_anticlock);
 
-        expandableButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExpandable) {
-                    addLayout.setVisibility(View.GONE);
-                    cloudImportLayout.setVisibility(View.GONE);
-                    localImportLayout.setVisibility(View.GONE);
-                    addLayout.startAnimation(animFabClose);
-                    cloudImportLayout.startAnimation(animFabClose);
-                    localImportLayout.startAnimation(animFabClose);
-                    expandableButton.startAnimation(animFabAntiClock);
-                    isExpandable = false;
-                } else {
-                    addLayout.setVisibility(View.VISIBLE);
-                    cloudImportLayout.setVisibility(View.VISIBLE);
-                    localImportLayout.setVisibility(View.VISIBLE);
-                    addLayout.startAnimation(animFabOpen);
-                    cloudImportLayout.startAnimation(animFabOpen);
-                    localImportLayout.startAnimation(animFabOpen);
-                    expandableButton.startAnimation(animFabClock);
-                    isExpandable = true;
-                }
+        expandableButton.setOnClickListener(v -> {
+            if (isExpandable) {
+                addLayout.setVisibility(View.GONE);
+                cloudImportLayout.setVisibility(View.GONE);
+                localImportLayout.setVisibility(View.GONE);
+                addLayout.startAnimation(animFabClose);
+                cloudImportLayout.startAnimation(animFabClose);
+                localImportLayout.startAnimation(animFabClose);
+                expandableButton.startAnimation(animFabAntiClock);
+                isExpandable = false;
+            } else {
+                addLayout.setVisibility(View.VISIBLE);
+                cloudImportLayout.setVisibility(View.VISIBLE);
+                localImportLayout.setVisibility(View.VISIBLE);
+                addLayout.startAnimation(animFabOpen);
+                cloudImportLayout.startAnimation(animFabOpen);
+                localImportLayout.startAnimation(animFabOpen);
+                expandableButton.startAnimation(animFabClock);
+                isExpandable = true;
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TrainingFragmentDirections.ActionTrainingFragmentToTrainingSettingsFragment action = TrainingFragmentDirections.actionTrainingFragmentToTrainingSettingsFragment();
-                action.setMode(GenericSettingsFragment.SETTING_MODE.ADD);
-                action.setTitle(getString(R.string.label_add));
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-            }
+        addButton.setOnClickListener(v -> {
+            TrainingFragmentDirections.ActionTrainingFragmentToTrainingSettingsFragment action = TrainingFragmentDirections.actionTrainingFragmentToTrainingSettingsFragment();
+            action.setMode(GenericSettingsFragment.SETTING_MODE.ADD);
+            action.setTitle(getString(R.string.label_add));
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
         });
 
-        cloudImportButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavDirections action = TrainingFragmentDirections.actionNavTrainingsFragmentToNavTrainingsDatabaseFragment();
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-            }
+        cloudImportButton.setOnClickListener(v -> {
+            NavDirections action = TrainingFragmentDirections.actionNavTrainingsFragmentToNavTrainingsDatabaseFragment();
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
         });
 
-        localImportButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fileDialogHelper.openImportFileDialog();
-            }
-        });
+        localImportButton.setOnClickListener(v -> fileDialogHelper.openImportFileDialog());
 
         loadFromDatabase();
 
@@ -249,12 +234,7 @@ public class TrainingFragment extends GenericFragment {
                 .setTitle(getString(R.string.label_publish) + " " + exportTrainingPlan.getName())
                 .setMessage(Html.fromHtml(getString(R.string.label_publish_message)))
                 //.setMessage(publishMessage)
-                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        fileDialogHelper.openExportFileDialog(exportTrainingPlan.getName());
-                    }
-                })
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> fileDialogHelper.openExportFileDialog(exportTrainingPlan.getName()))
                 .create();
         infoDialog.show();
 

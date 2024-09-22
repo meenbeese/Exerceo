@@ -37,18 +37,15 @@ public class SoundUtils {
         assetManager = context.getAssets();
         ttsInit = false;
 
-        ttS = new TextToSpeech(context, new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int status) {
+        ttS = new TextToSpeech(context, status -> {
 
-                if (status == TextToSpeech.ERROR) {
-                    Timber.e("Can't initialize text to speech");
-                }
+            if (status == TextToSpeech.ERROR) {
+                Timber.e("Can't initialize text to speech");
+            }
 
-                if (status == TextToSpeech.SUCCESS) {
-                    ttS.setLanguage(Locale.ENGLISH);
-                    ttsInit = true;
-                }
+            if (status == TextToSpeech.SUCCESS) {
+                ttS.setLanguage(Locale.ENGLISH);
+                ttsInit = true;
             }
         });
 

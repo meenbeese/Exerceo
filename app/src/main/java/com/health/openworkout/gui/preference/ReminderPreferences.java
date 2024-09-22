@@ -24,13 +24,7 @@ public class ReminderPreferences extends PreferenceFragmentCompat implements Sha
 
         final MultiSelectListPreference prefDays = findPreference("reminderDays");
 
-        prefDays.setSummaryProvider(new Preference.SummaryProvider<MultiSelectListPreference>() {
-            @Override
-            public CharSequence provideSummary(MultiSelectListPreference preference) {
-                return preference.getValues().toString();
-            }
-        });
-
+        prefDays.setSummaryProvider((Preference.SummaryProvider<MultiSelectListPreference>) preference -> preference.getValues().toString());
 
         reminderEnable = findPreference("reminderEnable");
     }

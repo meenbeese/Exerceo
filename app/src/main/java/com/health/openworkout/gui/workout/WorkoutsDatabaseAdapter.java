@@ -103,12 +103,7 @@ public class WorkoutsDatabaseAdapter extends RecyclerView.Adapter<WorkoutsDataba
             nameView = itemView.findViewById(R.id.nameView);
             detailedView = itemView.findViewById(R.id.detailedView);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onItemClick(getAdapterPosition(), v);
-                }
-            });
+            itemView.setOnClickListener(v -> onItemClickListener.onItemClick(getAdapterPosition(), v));
         }
     }
 }

@@ -2,13 +2,11 @@ package com.health.openworkout.gui.workout;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TableRow;
@@ -73,52 +71,32 @@ public class WorkoutSettingsFragment extends GenericSettingsFragment {
         videoCardView = root.findViewById(R.id.videoCardView);
         videoView = root.findViewById(R.id.videoView);
 
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                mp.setLooping(true);
-            }
+        videoView.setOnPreparedListener(mp -> mp.setLooping(true));
+
+        timeModeView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            workoutItem.setTimeMode(isChecked);
+            refreshTimeModeState();
         });
 
-        timeModeView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                workoutItem.setTimeMode(isChecked);
-                refreshTimeModeState();
-            }
+        videoModeView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            workoutItem.setVideoMode(isChecked);
+            refreshVideoModeState();
         });
 
-        videoModeView.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                workoutItem.setVideoMode(isChecked);
-                refreshVideoModeState();
-            }
-        });
-
-        imgView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isImageDialogRequest = true;
-                fileDialogHelper.openImageFileDialog();
-            }
+        imgView.setOnClickListener(v -> {
+            isImageDialogRequest = true;
+            fileDialogHelper.openImageFileDialog();
         });
 
         // support for SDK version <= 23 videoView onClickListener is not called
-        videoCardView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        isImageDialogRequest = false;
-                        fileDialogHelper.openVideoFileDialog();
-                    }
-                });
+        videoCardView.setOnClickListener(v -> {
+            isImageDialogRequest = false;
+            fileDialogHelper.openVideoFileDialog();
+        });
 
-        videoView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isImageDialogRequest = false;
-                fileDialogHelper.openVideoFileDialog();
-            }
+        videoView.setOnClickListener(v -> {
+            isImageDialogRequest = false;
+            fileDialogHelper.openVideoFileDialog();
         });
 
         setMode(WorkoutSettingsFragmentArgs.fromBundle(getArguments()).getMode());

@@ -61,48 +61,39 @@ public class WorkoutFragment extends GenericFragment {
         animFabClock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_clock);
         animFabAntiClock = AnimationUtils.loadAnimation(getContext(), R.anim.fab_rotate_anticlock);
 
-        expandableButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (isExpandable) {
-                    addLayout.setVisibility(View.GONE);
-                    addLayout.startAnimation(animFabClose);
-                    addFromDatabaseLayout.setVisibility(View.GONE);
-                    addFromDatabaseLayout.startAnimation(animFabClose);
-                    expandableButton.startAnimation(animFabAntiClock);
-                    isExpandable = false;
-                } else {
-                    addLayout.setVisibility(View.VISIBLE);
-                    addLayout.startAnimation(animFabOpen);
-                    addFromDatabaseLayout.setVisibility(View.VISIBLE);
-                    addFromDatabaseLayout.startAnimation(animFabOpen);
-                    expandableButton.startAnimation(animFabClock);
-                    isExpandable = true;
-                }
+        expandableButton.setOnClickListener(v -> {
+            if (isExpandable) {
+                addLayout.setVisibility(View.GONE);
+                addLayout.startAnimation(animFabClose);
+                addFromDatabaseLayout.setVisibility(View.GONE);
+                addFromDatabaseLayout.startAnimation(animFabClose);
+                expandableButton.startAnimation(animFabAntiClock);
+                isExpandable = false;
+            } else {
+                addLayout.setVisibility(View.VISIBLE);
+                addLayout.startAnimation(animFabOpen);
+                addFromDatabaseLayout.setVisibility(View.VISIBLE);
+                addFromDatabaseLayout.startAnimation(animFabOpen);
+                expandableButton.startAnimation(animFabClock);
+                isExpandable = true;
             }
         });
 
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final long workoutSessionId = WorkoutFragmentArgs.fromBundle(getArguments()).getSessionWorkoutId();
+        addButton.setOnClickListener(v -> {
+            final long workoutSessionId = WorkoutFragmentArgs.fromBundle(getArguments()).getSessionWorkoutId();
 
-                WorkoutFragmentDirections.ActionWorkoutFramgentToWorkoutSettingsFragment action = WorkoutFragmentDirections.actionWorkoutFramgentToWorkoutSettingsFragment();
-                action.setMode(GenericSettingsFragment.SETTING_MODE.ADD);
-                action.setTitle(getString(R.string.label_add));
-                action.setSessionWorkoutId(workoutSessionId);
-                action.setWorkoutItemId(-1);
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-            }
+            WorkoutFragmentDirections.ActionWorkoutFramgentToWorkoutSettingsFragment action = WorkoutFragmentDirections.actionWorkoutFramgentToWorkoutSettingsFragment();
+            action.setMode(GenericSettingsFragment.SETTING_MODE.ADD);
+            action.setTitle(getString(R.string.label_add));
+            action.setSessionWorkoutId(workoutSessionId);
+            action.setWorkoutItemId(-1);
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
         });
 
-        addFromDatabaseButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                WorkoutFragmentDirections.ActionWorkoutFragmentToWorkoutDatabaseFragment action = WorkoutFragmentDirections.actionWorkoutFragmentToWorkoutDatabaseFragment();
-                action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
-                Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
-            }
+        addFromDatabaseButton.setOnClickListener(v -> {
+            WorkoutFragmentDirections.ActionWorkoutFragmentToWorkoutDatabaseFragment action = WorkoutFragmentDirections.actionWorkoutFragmentToWorkoutDatabaseFragment();
+            action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
+            Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
         });
 
         loadFromDatabase();
