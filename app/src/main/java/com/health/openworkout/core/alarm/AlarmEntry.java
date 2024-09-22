@@ -6,24 +6,20 @@ public class AlarmEntry implements Comparable<AlarmEntry> {
     private final int dayOfWeek;
     private final long timeInMillis;
 
-    public AlarmEntry(int dayOfWeek, long timeInMillis)
-    {
+    public AlarmEntry(int dayOfWeek, long timeInMillis) {
         this.dayOfWeek = dayOfWeek;
         this.timeInMillis = timeInMillis;
     }
 
-    public int getDayOfWeek()
-    {
+    public int getDayOfWeek() {
         return dayOfWeek;
     }
 
-    private long getTimeInMillis()
-    {
+    private long getTimeInMillis() {
         return timeInMillis;
     }
 
-    public Calendar getNextTimestamp()
-    {
+    public Calendar getNextTimestamp() {
         // We just want the time *not* the date
         Calendar nextAlarmTimestamp = Calendar.getInstance();
         nextAlarmTimestamp.setTimeInMillis(getTimeInMillis());
@@ -43,8 +39,7 @@ public class AlarmEntry implements Comparable<AlarmEntry> {
     }
 
     @Override
-    public boolean equals(Object o)
-    {
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -55,23 +50,16 @@ public class AlarmEntry implements Comparable<AlarmEntry> {
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         int result = dayOfWeek;
-        result = 31 * result + (int) (timeInMillis ^ (timeInMillis >>> 32));
+        result = 31 * result + Long.hashCode(timeInMillis);
         return result;
     }
 
     @Override
-    public int compareTo(AlarmEntry o)
-    {
-        int rc = compare(dayOfWeek, o.dayOfWeek);
-        if (rc == 0) rc = compare(timeInMillis, o.timeInMillis);
+    public int compareTo(AlarmEntry o) {
+        int rc = Long.compare(dayOfWeek, o.dayOfWeek);
+        if (rc == 0) rc = Long.compare(timeInMillis, o.timeInMillis);
         return rc;
-    }
-
-    private int compare(long x, long y)
-    {
-        return (x < y) ? -1 : ((x == y) ? 0 : 1);
     }
 }
