@@ -21,7 +21,7 @@ public class AbdominalMuscleTraining extends TrainingPlan {
 
             AbdominalMuscleSession session = new AbdominalMuscleSession(i % 8, stressFac);
 
-            session.setName(String.format(getContext().getString(R.string.day_unit), i+1));
+            session.name = String.format(getContext().getString(R.string.day_unit), i+1);
             addWorkoutSession(session);
         }
     }

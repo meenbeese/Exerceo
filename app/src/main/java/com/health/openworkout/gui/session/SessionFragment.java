@@ -94,9 +94,9 @@ public class SessionFragment extends GenericFragment {
 
                     for (int nr=startNr; nr < (startNr + offsetNr); nr++) {
                         WorkoutSession workoutSession = new WorkoutSession();
-                        workoutSession.setName(String.format(getString(R.string.day_unit), nr));
-                        workoutSession.setTrainingPlanId(trainingPlan.getTrainingPlanId());
-                        workoutSession.setOrderNr(nr);
+                        workoutSession.name = String.format(getString(R.string.day_unit), nr);
+                        workoutSession.trainingPlanId = trainingPlan.getTrainingPlanId();
+                        workoutSession.orderNr = nr;
                         trainingPlan.addWorkoutSession(workoutSession);
                         OpenWorkout.getInstance().insertWorkoutSession(workoutSession);
                         getAdapter().notifyItemInserted(nr);
@@ -142,8 +142,8 @@ public class SessionFragment extends GenericFragment {
         WorkoutSession workoutSession = workoutSessionList.get(position);
 
         SessionFragmentDirections.ActionSessionFragmentToWorkoutFragment action = SessionFragmentDirections.actionSessionFragmentToWorkoutFragment();
-        action.setTitle(workoutSession.getName());
-        action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
+        action.setTitle(workoutSession.name);
+        action.setSessionWorkoutId(workoutSession.workoutSessionId);
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
     }
 
@@ -152,7 +152,7 @@ public class SessionFragment extends GenericFragment {
         WorkoutSession workoutSession = workoutSessionList.get(position);
 
         SessionFragmentDirections.ActionSessionsFragmentToSessionSettingsFragment action = SessionFragmentDirections.actionSessionsFragmentToSessionSettingsFragment();
-        action.setWorkoutSessionId(workoutSession.getWorkoutSessionId());
+        action.setWorkoutSessionId(workoutSession.workoutSessionId);
         action.setMode(GenericSettingsFragment.SETTING_MODE.EDIT);
         action.setTitle(getString(R.string.label_edit));
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
@@ -161,7 +161,7 @@ public class SessionFragment extends GenericFragment {
     @Override
     protected void onDeleteCallback(int position) {
         OpenWorkout.getInstance().deleteWorkoutSession(workoutSessionList.get(position));
-        Toast.makeText(getContext(), String.format(getString(R.string.label_delete_toast), workoutSessionList.get(position).getName()), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), String.format(getString(R.string.label_delete_toast), workoutSessionList.get(position).name), Toast.LENGTH_SHORT).show();
         getItemList().remove(position);
     }
 
@@ -170,12 +170,12 @@ public class SessionFragment extends GenericFragment {
         WorkoutSession origWorkoutSession = workoutSessionList.get(position);
         WorkoutSession duplicateWorkoutSession = origWorkoutSession.clone();
 
-        duplicateWorkoutSession.setWorkoutSessionId(0);
+        duplicateWorkoutSession.workoutSessionId = 0;
         workoutSessionList.add(position, duplicateWorkoutSession);
         saveToDatabase();
 
         long workoutSessionId = OpenWorkout.getInstance().insertWorkoutSession(duplicateWorkoutSession);
-        duplicateWorkoutSession.setWorkoutSessionId(workoutSessionId);
+        duplicateWorkoutSession.workoutSessionId = workoutSessionId;
     }
 
     @Override
@@ -207,7 +207,7 @@ public class SessionFragment extends GenericFragment {
     @Override
     protected void saveToDatabase() {
         for (int i=0; i<workoutSessionList.size(); i++) {
-            workoutSessionList.get(i).setOrderNr(i);
+            workoutSessionList.get(i).orderNr = i;
             OpenWorkout.getInstance().updateWorkoutSession(workoutSessionList.get(i));
         }
     }

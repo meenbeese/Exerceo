@@ -35,7 +35,7 @@ public class SessionSettingsFragment extends GenericSettingsFragment {
 
     @Override
     protected String getTitle() {
-        return workoutSession.getName();
+        return workoutSession.name;
     }
 
     @Override
@@ -56,18 +56,18 @@ public class SessionSettingsFragment extends GenericSettingsFragment {
             imgView.setImageResource(R.drawable.ic_session_undone);
         }
 
-        nameView.setText(workoutSession.getName());
+        nameView.setText(workoutSession.name);
     }
 
     @Override
     protected boolean saveToDatabase(SETTING_MODE mode) {
-        workoutSession.setName(nameView.getText().toString());
+        workoutSession.name = nameView.getText().toString();
 
         switch (mode) {
             case ADD:
                 long trainingPlanId = SessionSettingsFragmentArgs.fromBundle(getArguments()).getTrainingPlanId();
 
-                workoutSession.setTrainingPlanId(trainingPlanId);
+                workoutSession.trainingPlanId = trainingPlanId;
                 OpenWorkout.getInstance().insertWorkoutSession(workoutSession);
                 break;
             case EDIT:

@@ -38,7 +38,7 @@ public class SessionsAdapter extends GenericAdapter<SessionsAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull SessionsAdapter.ViewHolder holder, int position) {
         super.onBindViewHolder(holder, position);
         WorkoutSession workoutSession = workoutSessionList.get(position);
-        holder.nameView.setText(workoutSession.getName());
+        holder.nameView.setText(workoutSession.name);
 
         if (workoutSession.isFinished()) {
             holder.imgView.setImageResource(R.drawable.ic_session_done);
@@ -49,7 +49,7 @@ public class SessionsAdapter extends GenericAdapter<SessionsAdapter.ViewHolder> 
 
     @Override
     public long getItemId(int position) {
-        return workoutSessionList.get(position).getWorkoutSessionId();
+        return workoutSessionList.get(position).workoutSessionId;
     }
 
     @Override

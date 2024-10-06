@@ -92,7 +92,7 @@ public class WorkoutFragment extends GenericFragment {
 
         addFromDatabaseButton.setOnClickListener(v -> {
             WorkoutFragmentDirections.ActionWorkoutFragmentToWorkoutDatabaseFragment action = WorkoutFragmentDirections.actionWorkoutFragmentToWorkoutDatabaseFragment();
-            action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
+            action.setSessionWorkoutId(workoutSession.workoutSessionId);
             Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
         });
 
@@ -103,7 +103,7 @@ public class WorkoutFragment extends GenericFragment {
 
     @Override
     protected String getTitle() {
-        return workoutSession.getName();
+        return workoutSession.name;
     }
 
     @Override
@@ -146,8 +146,8 @@ public class WorkoutFragment extends GenericFragment {
         WorkoutItem workoutItem = workoutItemList.get(position);
 
         WorkoutFragmentDirections.ActionWorkoutFragmentToWorkoutSlideFragment action = WorkoutFragmentDirections.actionWorkoutFragmentToWorkoutSlideFragment();
-        action.setTitle(workoutSession.getName());
-        action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
+        action.setTitle(workoutSession.name);
+        action.setSessionWorkoutId(workoutSession.workoutSessionId);
         action.setWorkoutItemId(workoutItem.getWorkoutItemId());
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
     }
@@ -157,7 +157,7 @@ public class WorkoutFragment extends GenericFragment {
         WorkoutItem workoutItem = workoutItemList.get(position);
 
         WorkoutFragmentDirections.ActionWorkoutFramgentToWorkoutSettingsFragment action = WorkoutFragmentDirections.actionWorkoutFramgentToWorkoutSettingsFragment();
-        action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
+        action.setSessionWorkoutId(workoutSession.workoutSessionId);
         action.setWorkoutItemId(workoutItem.getWorkoutItemId());
         action.setMode(GenericSettingsFragment.SETTING_MODE.EDIT);
         action.setTitle(getString(R.string.label_edit));

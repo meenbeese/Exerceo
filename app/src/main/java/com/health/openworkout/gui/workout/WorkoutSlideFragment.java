@@ -377,7 +377,7 @@ public class WorkoutSlideFragment extends Fragment {
         OpenWorkout.getInstance().updateWorkoutSession(workoutSession);
 
         WorkoutSlideFragmentDirections.ActionNavWorkoutSlideFragmentToTrophyFragment action = WorkoutSlideFragmentDirections.actionNavWorkoutSlideFragmentToTrophyFragment();
-        action.setSessionWorkoutId(workoutSession.getWorkoutSessionId());
+        action.setSessionWorkoutId(workoutSession.workoutSessionId);
         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
     }
 

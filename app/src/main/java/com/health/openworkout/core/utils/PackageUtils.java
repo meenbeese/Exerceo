@@ -139,7 +139,7 @@ public class PackageUtils {
             }
 
             for (WorkoutSession workoutSession : trainingPlan.getWorkoutSessions()) {
-                workoutSession.setWorkoutSessionId(0);
+                workoutSession.workoutSessionId = 0;
 
                 for (WorkoutItem workoutItem : workoutSession.getWorkoutItems()) {
                     workoutItem.setWorkoutItemId(0);

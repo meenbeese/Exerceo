@@ -14,7 +14,7 @@ public class SevenMinutesTraining extends TrainingPlan {
         for (int i=1; i<=7; i++) {
             SevenMinutesSession session = new SevenMinutesSession();
 
-            session.setName(String.format(getContext().getString(R.string.day_unit), i));
+            session.name = String.format(getContext().getString(R.string.day_unit), i);
             addWorkoutSession(session);
         }
     }

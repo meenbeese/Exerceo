@@ -52,11 +52,11 @@ public class HomeFragment extends Fragment {
                 if (nextUserWorkoutSession != null) {
                     if (!nextUserWorkoutSession.getWorkoutItems().isEmpty()) {
                         HomeFragmentDirections.ActionHomeFragmentToWorkoutFragmentSlide action = HomeFragmentDirections.actionHomeFragmentToWorkoutFragmentSlide();
-                        action.setTitle(nextUserWorkoutSession.getName());
-                        action.setSessionWorkoutId(nextUserWorkoutSession.getWorkoutSessionId());
+                        action.setTitle(nextUserWorkoutSession.name);
+                        action.setSessionWorkoutId(nextUserWorkoutSession.workoutSessionId);
                         Navigation.findNavController(getActivity(), R.id.nav_host_fragment).navigate(action);
                     } else {
-                        Toast.makeText(getContext(), String.format(getString(R.string.error_no_workout_items), nextUserWorkoutSession.getName()), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), String.format(getString(R.string.error_no_workout_items), nextUserWorkoutSession.name), Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     Toast.makeText(getContext(), String.format(getString(R.string.error_no_sessions), userTrainingPlan.getName()), Toast.LENGTH_SHORT).show();

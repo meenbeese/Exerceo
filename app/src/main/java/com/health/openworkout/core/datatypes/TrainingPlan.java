@@ -57,7 +57,7 @@ public class TrainingPlan implements Comparable<TrainingPlan>, Cloneable {
         }
 
         for (WorkoutSession workoutSession : clone.workoutSessions) {
-            workoutSession.setWorkoutSessionId(0);
+            workoutSession.workoutSessionId = 0;
 
             for (WorkoutItem workoutItem : workoutSession.getWorkoutItems()) {
                 workoutItem.setWorkoutItemId(0);
