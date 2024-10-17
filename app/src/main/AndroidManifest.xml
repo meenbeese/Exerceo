@@ -16,12 +16,11 @@
 
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
+            android:exported="true"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -31,7 +30,8 @@
             android:authorities="com.health.openworkout.videoprovider"
             android:exported="false" />
 
-        <receiver android:name=".core.alarm.ReminderBootReceiver" android:enabled="false">
+        <receiver android:name=".core.alarm.ReminderBootReceiver" android:enabled="false"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
