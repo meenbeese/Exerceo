@@ -57,9 +57,9 @@ public class TrainingDatabaseAdapter extends RecyclerView.Adapter<TrainingDataba
         this.holder = holder;
         GitHubFile gitHubFile = gitHubFileList.get(position);
 
-        holder.nameView.setText(gitHubFile.getName().substring(0, gitHubFile.getName().length() - 4));
+        holder.nameView.setText(gitHubFile.name.substring(0, gitHubFile.name.length() - 4));
         DecimalFormat sizeFormat = new DecimalFormat("##0.00");
-        double fileSize = (gitHubFile.getSize() / 1000000.0f);
+        double fileSize = (gitHubFile.size / 1000000.0f);
 
         if (fileSize >= 1.0f) {
             holder.detailedView.setText(String.format(context.getString(R.string.label_package_size_mbytes), sizeFormat.format(fileSize)));
@@ -68,7 +68,7 @@ public class TrainingDatabaseAdapter extends RecyclerView.Adapter<TrainingDataba
             holder.detailedView.setText(String.format(context.getString(R.string.label_package_size_kbytes), sizeFormat.format(fileSize)));
         }
 
-        String displayName = gitHubFile.getName().substring(0, gitHubFile.getName().length() -4);
+        String displayName = gitHubFile.name.substring(0, gitHubFile.name.length() -4);
         File packageDir = new File(context.getFilesDir(),  displayName);
 
         if (packageDir.exists()) {

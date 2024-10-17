@@ -358,7 +358,7 @@ public class PackageUtils {
     }
 
     public void downloadFile(GitHubFile gitHubFile) {
-        Call<ResponseBody> downloadFile = gitHubApi.downloadFile(gitHubFile.getDownloadURL());
+        Call<ResponseBody> downloadFile = gitHubApi.downloadFile(gitHubFile.downloadURL);
 
         downloadFile.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -367,19 +367,19 @@ public class PackageUtils {
                     new AsyncTask<Void, Void, Void>() {
                         @Override
                         protected Void doInBackground(Void... voids) {
-                            boolean writtenToDisk = writeResponseBodyToDisk(gitHubFile.getName(), gitHubFile.getSize(), response.body());
+                            boolean writtenToDisk = writeResponseBodyToDisk(gitHubFile.name, gitHubFile.size, response.body());
 
                             if (writtenToDisk) {
                                 if (onGitHubCallbackListener != null) {
-                                    Timber.d("Successful " + gitHubFile.getName() + " file downloaded from " + gitHubFile.getDownloadURL());
-                                    onGitHubCallbackListener.onGitHubDownloadFile(new File(context.getFilesDir(), gitHubFile.getName()));
+                                    Timber.d("Successful " + gitHubFile.name + " file downloaded from " + gitHubFile.downloadURL);
+                                    onGitHubCallbackListener.onGitHubDownloadFile(new File(context.getFilesDir(), gitHubFile.name));
                                 }
                             }
                             return null;
                         }
                     }.execute();
                 } else {
-                    Timber.e("Download failed for URL " + gitHubFile.getDownloadURL());
+                    Timber.e("Download failed for URL " + gitHubFile.downloadURL);
                 }
             }
 
