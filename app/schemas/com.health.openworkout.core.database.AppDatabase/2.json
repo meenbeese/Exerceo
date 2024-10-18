@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "007a41b5201e4b1e5a62195c5ba4415c",
+    "identityHash": "0a4508ffb33cc8cd5a418cb2f18910f0",
     "entities": [
       {
         "tableName": "User",
@@ -88,7 +88,7 @@
       },
       {
         "tableName": "WorkoutSession",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`workoutSessionId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingPlanId` INTEGER NOT NULL, `orderNr` INTEGER NOT NULL, `name` TEXT, `finished` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`workoutSessionId` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `trainingPlanId` INTEGER NOT NULL, `orderNr` INTEGER NOT NULL, `name` TEXT, `isFinished` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "workoutSessionId",
@@ -115,8 +115,8 @@
             "notNull": false
           },
           {
-            "fieldPath": "finished",
-            "columnName": "finished",
+            "fieldPath": "isFinished",
+            "columnName": "isFinished",
             "affinity": "INTEGER",
             "notNull": true
           }
@@ -250,7 +250,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '007a41b5201e4b1e5a62195c5ba4415c')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0a4508ffb33cc8cd5a418cb2f18910f0')"
     ]
   }
 }
