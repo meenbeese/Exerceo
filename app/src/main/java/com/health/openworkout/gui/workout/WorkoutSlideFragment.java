@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,8 +41,6 @@ import com.health.openworkout.gui.utils.SoundUtils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Calendar;
-
-import timber.log.Timber;
 
 public class WorkoutSlideFragment extends Fragment {
     private enum WORKOUT_STATE {INIT, PREPARE, START, BREAK, FINISH}
@@ -75,6 +74,8 @@ public class WorkoutSlideFragment extends Fragment {
     private WorkoutItem nextWorkoutItem;
     private WORKOUT_STATE workoutState;
     private long workoutItemIdFromFragment;
+
+    private final String TAG = getClass().getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -251,7 +252,7 @@ public class WorkoutSlideFragment extends Fragment {
             } catch (SecurityException ex) {
                 videoView.setVideoURI(null);
                 Toast.makeText(getContext(), getContext().getString(R.string.error_no_access_to_file) + " " + nextWorkoutItem.getVideoPath(), Toast.LENGTH_SHORT).show();
-                Timber.e(ex);
+                Log.e(TAG, ex.toString());
             }
 
             videoCardView.animate().alpha(1.0f);
@@ -277,11 +278,11 @@ public class WorkoutSlideFragment extends Fragment {
                     ims.close();
                 }
             } catch (IOException ex) {
-                Timber.e(ex);
+                Log.e(TAG, ex.toString());
             } catch (SecurityException ex) {
                 videoImageView.setImageResource(R.drawable.ic_no_file);
                 Toast.makeText(getContext(), getContext().getString(R.string.error_no_access_to_file) + " " + nextWorkoutItem.getImagePath(), Toast.LENGTH_SHORT).show();
-                Timber.e(ex);
+                Log.e(TAG, ex.toString());
             }
         }
 
@@ -405,9 +406,9 @@ public class WorkoutSlideFragment extends Fragment {
     }
 
     private class OverviewWorkoutItemEntry extends TableRow {
-        private ImageView status;
-        private TextView reps;
-        private TextView name;
+        private final ImageView status;
+        private final TextView reps;
+        private final TextView name;
 
         public OverviewWorkoutItemEntry(Context context, WorkoutItem workoutItem) {
             super(context);

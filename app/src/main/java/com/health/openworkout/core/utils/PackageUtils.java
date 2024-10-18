@@ -5,7 +5,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.health.openworkout.R;
@@ -39,7 +42,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
 import retrofit2.http.Streaming;
 import retrofit2.http.Url;
-import timber.log.Timber;
 
 public class PackageUtils {
     private Context context;
@@ -50,6 +52,8 @@ public class PackageUtils {
     private Retrofit retrofit;
     private GitHubApi gitHubApi;
     private OnGitHubCallbackListener onGitHubCallbackListener;
+
+    private final String TAG = getClass().getSimpleName();
 
     public PackageUtils(Context context) {
         this.context = context;
@@ -76,7 +80,7 @@ public class PackageUtils {
     }
 
     private TrainingPlan importTrainingPlan(Uri zipFileUri, String filename) {
-        Timber.d("Import training plan " + filename);
+        Log.d(TAG,"Import training plan " + filename);
 
         try {
             unzipFile(zipFileUri, filename);
@@ -94,7 +98,7 @@ public class PackageUtils {
             reader.close();
 
             TrainingPlan gsonTrainingPlan = gson.fromJson(result.toString(), TrainingPlan.class);
-            Timber.d("Read training database " + gsonTrainingPlan.getName());
+            Log.d(TAG, "Read training database " + gsonTrainingPlan.getName());
             OpenWorkout.getInstance().insertTrainingPlan(gsonTrainingPlan);
 
             Toast.makeText(context, String.format(context.getString(R.string.label_info_imported), gsonTrainingPlan.getName(), filename), Toast.LENGTH_LONG).show();
@@ -102,11 +106,11 @@ public class PackageUtils {
             return gsonTrainingPlan;
         } catch (IOException ex) {
             Toast.makeText(context, String.format(context.getString(R.string.error_no_valid_training_package), filename + ".zip"), Toast.LENGTH_LONG).show();
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         } finally {
             File zipFile = new File(context.getFilesDir(), filename + ".zip");
             if (zipFile.exists()) {
-                Timber.d("Delete unzipped local zip file " + zipFile);
+                Log.d(TAG, "Delete unzipped local zip file " + zipFile);
                 zipFile.delete();
             }
         }
@@ -115,7 +119,7 @@ public class PackageUtils {
     }
 
     public void exportTrainingPlan(TrainingPlan trainingPlan, Uri zipFileUri) {
-        Timber.d("Export training plan " + trainingPlan.getName());
+        Log.d(TAG, "Export training plan " + trainingPlan.getName());
 
         try {
             String zipFileDisplayName = getDisplayName(zipFileUri);
@@ -159,16 +163,16 @@ public class PackageUtils {
             FileOutputStream jsonOut = new FileOutputStream(trainingDatabase);
             jsonOut.write(jsonString.getBytes());
             jsonOut.close();
-            Timber.d("Written database.json");
+            Log.d(TAG, "Written database.json");
 
             zipDirectory(trainingDir, zipFileUri);
-            Timber.d("Zipped " + trainingPlan.getName());
+            Log.d(TAG, "Zipped " + trainingPlan.getName());
             deleteDirectory(trainingDir);
             Toast.makeText(context, String.format(context.getString(R.string.label_info_exported), trainingPlan.getName(), zipFileDisplayName), Toast.LENGTH_LONG).show();
         }catch (IOException ex) {
             Toast.makeText(context, ex.getLocalizedMessage(), Toast.LENGTH_LONG).show();
 
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
     }
 
@@ -183,7 +187,7 @@ public class PackageUtils {
 
             copyFile(in, out);
 
-            Timber.d("Copied file " + displayName + " to internal storage");
+            Log.d(TAG, "Copied file " + displayName + " to internal storage");
         }
 
         return Uri.fromFile(trainingImg).toString();
@@ -200,7 +204,7 @@ public class PackageUtils {
 
             copyFile(in, out);
 
-            Timber.d("Copied file " + displayName + " to internal storage");
+            Log.d(TAG, "Copied file " + displayName + " to internal storage");
         }
 
         return Uri.fromFile(trainingVideo).toString();
@@ -301,10 +305,10 @@ public class PackageUtils {
                 zipOut.getParentFile().mkdir();
                 // if the entry is a file, extracts it
                 extractFile(zipIn, zipOut);
-                Timber.d("Extract file " + entry.getName());
+                Log.d(TAG, "Extract file " + entry.getName());
             } else {
                 zipOut.mkdir();
-                Timber.d("Extract folder " + entry.getName());
+                Log.d(TAG, "Extract folder " + entry.getName());
             }
             zipIn.closeEntry();
 
@@ -335,24 +339,24 @@ public class PackageUtils {
     public void getGitHubFiles() {
         Call<List<GitHubFile>> gitHubFileList = gitHubApi.getFileList();
 
-        gitHubFileList.enqueue(new Callback<List<GitHubFile>>() {
+        gitHubFileList.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<GitHubFile>> call, Response<List<GitHubFile>> response) {
                 if (response.isSuccessful()) {
-                    Timber.d("Successful file list from GitHub received");
+                    Log.d(TAG, "Successful file list from GitHub received");
 
                     if (onGitHubCallbackListener != null) {
                         onGitHubCallbackListener.onGitHubFileList(response.body());
                     }
                 } else {
-                    Timber.e("Get GitHub file list error");
+                    Log.e(TAG, "Get GitHub file list error");
                 }
             }
 
             @Override
-            public void onFailure(Call<List<GitHubFile>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<GitHubFile>> call, @NonNull Throwable t) {
                 onGitHubCallbackListener.onGitHubFailure(new Exception(context.getString(R.string.error_no_github_connection)));
-                Timber.e("GitHub call failed " + t.getMessage());
+                Log.e(TAG, "GitHub call failed " + t.getMessage());
             }
         });
     }
@@ -360,7 +364,7 @@ public class PackageUtils {
     public void downloadFile(GitHubFile gitHubFile) {
         Call<ResponseBody> downloadFile = gitHubApi.downloadFile(gitHubFile.downloadURL);
 
-        downloadFile.enqueue(new Callback<ResponseBody>() {
+        downloadFile.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccessful()) {
@@ -371,7 +375,7 @@ public class PackageUtils {
 
                             if (writtenToDisk) {
                                 if (onGitHubCallbackListener != null) {
-                                    Timber.d("Successful " + gitHubFile.name + " file downloaded from " + gitHubFile.downloadURL);
+                                    Log.d(TAG, "Successful " + gitHubFile.name + " file downloaded from " + gitHubFile.downloadURL);
                                     onGitHubCallbackListener.onGitHubDownloadFile(new File(context.getFilesDir(), gitHubFile.name));
                                 }
                             }
@@ -379,14 +383,14 @@ public class PackageUtils {
                         }
                     }.execute();
                 } else {
-                    Timber.e("Download failed for URL " + gitHubFile.downloadURL);
+                    Log.e(TAG, "Download failed for URL " + gitHubFile.downloadURL);
                 }
             }
 
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
                 onGitHubCallbackListener.onGitHubFailure(new Exception(context.getString(R.string.error_no_github_download) + "(" + t.getMessage() + ")"));
-                Timber.e("Download failed " + t.getMessage());
+                Log.e(TAG, "Download failed " + t.getMessage());
             }
         });
     }
@@ -430,7 +434,7 @@ public class PackageUtils {
 
                 return true;
             } catch (IOException e) {
-                Timber.e("Error writing to disk " + e);
+                Log.e(TAG, "Error writing to disk " + e);
                 return false;
             } finally {
                 if (inputStream != null) {
@@ -442,7 +446,7 @@ public class PackageUtils {
                 }
             }
         } catch (IOException e) {
-            Timber.e("Error writing to disk " + e);
+            Log.e(TAG, "Error writing to disk " + e);
             return false;
         }
     }

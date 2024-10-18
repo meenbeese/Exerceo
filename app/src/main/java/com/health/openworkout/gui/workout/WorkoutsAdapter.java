@@ -3,6 +3,7 @@ package com.health.openworkout.gui.workout;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,11 +22,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import timber.log.Timber;
-
 public class WorkoutsAdapter extends GenericAdapter<WorkoutsAdapter.ViewHolder> {
     private final List<WorkoutItem> workoutItemList;
     private Context context;
+
+    private final String TAG = getClass().getSimpleName();
 
     public WorkoutsAdapter(Context aContext, List<WorkoutItem> workoutItemList) {
         super(aContext);
@@ -81,11 +82,11 @@ public class WorkoutsAdapter extends GenericAdapter<WorkoutsAdapter.ViewHolder> 
             }
         } catch (IOException ex) {
             holder.imgView.setImageResource(R.drawable.ic_no_file);
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         } catch (SecurityException ex) {
             holder.imgView.setImageResource(R.drawable.ic_no_file);
             Toast.makeText(context, context.getString(R.string.error_no_access_to_file) + " " + workoutItem.getImagePath(), Toast.LENGTH_SHORT).show();
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
 
         switch (getMode()) {

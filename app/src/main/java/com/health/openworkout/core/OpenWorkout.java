@@ -1,6 +1,7 @@
 package com.health.openworkout.core;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
@@ -20,8 +21,6 @@ import com.health.openworkout.gui.utils.SoundUtils;
 import java.util.ArrayList;
 import java.util.List;
 
-import timber.log.Timber;
-
 public class OpenWorkout {
     public static boolean DEBUG_MODE = false;
     private static final String DATABASE_NAME = "openWorkout.db";
@@ -31,6 +30,8 @@ public class OpenWorkout {
 
     private AppDatabase appDB;
     private User user;
+
+    private final String TAG = getClass().getSimpleName();
 
     private SoundUtils soundUtils;
 
@@ -101,19 +102,19 @@ public class OpenWorkout {
     }
 
     public void printTrainingPlans() {
-        Timber.d("################ TRAINING PLAN PRINTOUT #####################");
+        Log.d(TAG, "################ TRAINING PLAN PRINTOUT #####################");
         List<TrainingPlan> trainingPlanList = appDB.trainingPlanDAO().getAll();
 
         for (TrainingPlan singleTrainingPlan : trainingPlanList) {
-            Timber.d("- Training Plan " + singleTrainingPlan.getName() + " Id " + singleTrainingPlan.getTrainingPlanId());
+            Log.d(TAG, "- Training Plan " + singleTrainingPlan.getName() + " Id " + singleTrainingPlan.getTrainingPlanId());
             List<WorkoutSession> workoutSessionList = appDB.workoutSessionDAO().getAll(singleTrainingPlan.getTrainingPlanId());
 
             for (WorkoutSession singleWorkoutSession : workoutSessionList) {
-                Timber.d("-- WorkoutSession " + singleWorkoutSession.name + " Id " + singleWorkoutSession.workoutSessionId);
+                Log.d(TAG, "-- WorkoutSession " + singleWorkoutSession.name + " Id " + singleWorkoutSession.workoutSessionId);
                 List<WorkoutItem> workoutItemList = appDB.workoutItemDAO().getAll(singleWorkoutSession.workoutSessionId);
 
                 for (WorkoutItem singleWorkItem : workoutItemList) {
-                    Timber.d("---- WorkoutItem " + singleWorkItem.getName() + " Id " + singleWorkItem.getWorkoutItemId());
+                    Log.d(TAG, "---- WorkoutItem " + singleWorkItem.getName() + " Id " + singleWorkItem.getWorkoutItemId());
                 }
             }
         }

@@ -3,6 +3,7 @@ package com.health.openworkout.gui.training;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +27,13 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import timber.log.Timber;
-
 public class TrainingDatabaseAdapter extends RecyclerView.Adapter<TrainingDatabaseAdapter.ViewHolder> {
     private List<GitHubFile> gitHubFileList;
     private ViewHolder holder;
     private Context context;
     private static GenericAdapter.OnGenericClickListener onItemClickListener;
+
+    private final String TAG = getClass().getSimpleName();
 
     public TrainingDatabaseAdapter(Context aContext, List<GitHubFile> gitHubFileList) {
         this.context = aContext;
@@ -108,11 +109,11 @@ public class TrainingDatabaseAdapter extends RecyclerView.Adapter<TrainingDataba
                 ims.close();
             }
         } catch (IOException ex) {
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         } catch (SecurityException ex) {
             holder.imgView.setImageResource(R.drawable.ic_no_file);
             Toast.makeText(context, context.getString(R.string.error_no_access_to_file) + " " + trainingPlan.getImagePath(), Toast.LENGTH_SHORT).show();
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
 
         holder.downloadView.setImageResource(R.drawable.ic_download_finished);

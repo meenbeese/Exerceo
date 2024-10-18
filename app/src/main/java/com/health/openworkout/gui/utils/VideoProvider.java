@@ -7,28 +7,30 @@ import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.CancellationSignal;
+import android.util.Log;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import timber.log.Timber;
-
 public class VideoProvider extends ContentProvider {
+
+    private final String TAG = getClass().getSimpleName();
 
     @Override
     public AssetFileDescriptor openAssetFile(Uri uri, String mode) throws FileNotFoundException {
         AssetManager am = getContext().getAssets();
         String file_name = uri.getPath().substring(1);
 
-        if(file_name == null)
+        if (file_name == null) {
             throw new FileNotFoundException();
+        }
 
         AssetFileDescriptor afd = null;
 
         try {
             afd = am.openFd(file_name);
         } catch (IOException ex) {
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
 
         return afd;

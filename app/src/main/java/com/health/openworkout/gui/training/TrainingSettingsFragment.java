@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +23,6 @@ import com.health.openworkout.gui.utils.FileDialogHelper;
 import java.io.IOException;
 import java.io.InputStream;
 
-import timber.log.Timber;
-
 public class TrainingSettingsFragment extends GenericSettingsFragment {
     private TrainingPlan trainingPlan;
 
@@ -31,6 +30,8 @@ public class TrainingSettingsFragment extends GenericSettingsFragment {
     private TextView nameView;
 
     private FileDialogHelper fileDialogHelper;
+
+    private final String TAG = getClass().getSimpleName();
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -77,12 +78,11 @@ public class TrainingSettingsFragment extends GenericSettingsFragment {
                 ims.close();
             }
         } catch (IOException ex) {
-            Timber.e(ex);
-        }
-          catch (SecurityException ex) {
+            Log.e(TAG, ex.toString());
+        } catch (SecurityException ex) {
             imgView.setImageResource(R.drawable.ic_no_file);
             Toast.makeText(getContext(), getContext().getString(R.string.error_no_access_to_file) + " " + trainingPlan.getImagePath(), Toast.LENGTH_SHORT).show();
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
 
         nameView.setText(trainingPlan.getName());

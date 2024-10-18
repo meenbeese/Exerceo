@@ -4,12 +4,11 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.fragment.app.Fragment;
 
 import com.health.openworkout.R;
-
-import timber.log.Timber;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -28,6 +27,8 @@ public class FileDialogHelper {
     private Fragment fragment;
 
     private String defaultFilename;
+
+    private final String TAG = getClass().getSimpleName();
 
     public FileDialogHelper(Fragment fragment) {
         this.fragment = fragment;
@@ -111,13 +112,11 @@ public class FileDialogHelper {
 
     private void requestPermissionForReadExternalStorage(int requestCode) {
         try {
-            fragment.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    requestCode);
+            fragment.requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, requestCode);
         } catch (Exception ex) {
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
     }
-
 
     private boolean checkPermissionForWriteExternalStorage() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -129,10 +128,9 @@ public class FileDialogHelper {
 
     private void requestPermissionForWriteExternalStorage(int requestCode) {
         try {
-            fragment.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    requestCode);
+            fragment.requestPermissions(new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, requestCode);
         } catch (Exception ex) {
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
     }
 

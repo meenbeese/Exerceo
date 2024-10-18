@@ -1,16 +1,14 @@
 package com.health.openworkout.gui.utils;
 
-
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.media.SoundPool;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 
 import java.io.IOException;
 import java.util.Locale;
-
-import timber.log.Timber;
 
 public class SoundUtils {
     public enum SOUND {WORKOUT_COUNT_BEFORE_START, WORKOUT_START, WORKOUT_STOP, SESSION_COMPLETED}
@@ -30,6 +28,8 @@ public class SoundUtils {
 
     private AssetManager assetManager;
 
+    private final String TAG = getClass().getSimpleName();
+
     public SoundUtils(Context context) {
         soundPool = new SoundPool.Builder()
                 .setMaxStreams(NUMBER_OF_SIMULTANEOUS_SOUNDS)
@@ -40,7 +40,7 @@ public class SoundUtils {
         ttS = new TextToSpeech(context, status -> {
 
             if (status == TextToSpeech.ERROR) {
-                Timber.e("Can't initialize text to speech");
+                Log.e(TAG, "Can't initialize text to speech");
             }
 
             if (status == TextToSpeech.SUCCESS) {
@@ -65,7 +65,7 @@ public class SoundUtils {
             afd = assetManager.openFd("sound/session_completed.mp3");
             soundIdSessionCompleted = soundPool.load(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength(),1);
         } catch (IOException ex) {
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
     }
 

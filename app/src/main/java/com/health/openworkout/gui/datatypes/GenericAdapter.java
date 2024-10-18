@@ -1,6 +1,7 @@
 package com.health.openworkout.gui.datatypes;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,8 +17,6 @@ import com.health.openworkout.R;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import timber.log.Timber;
-
 public abstract class GenericAdapter<VH extends GenericAdapter.ViewHolder> extends RecyclerView.Adapter<VH> {
     private GenericFragment.FRAGMENT_MODE mode;
     private Context context;
@@ -28,6 +27,8 @@ public abstract class GenericAdapter<VH extends GenericAdapter.ViewHolder> exten
     private static OnGenericClickListener onDuplicateClickListener;
     private static OnGenericClickListener onPublishClickListener;
     private static OnGenericClickListener onExportClickListener;
+
+    private static final String TAG = GenericAdapter.class.getSimpleName();
 
     public GenericAdapter(Context aContext) {
         this.mode = GenericFragment.FRAGMENT_MODE.VIEW;
@@ -171,7 +172,7 @@ public abstract class GenericAdapter<VH extends GenericAdapter.ViewHolder> exten
     }
 
     public interface OnGenericClickListener {
-        public void onItemClick(int position, View v);
+        void onItemClick(int position, View v);
     }
 
     private static void showForcePopupMenuIcons(PopupMenu popupMenu) {
@@ -190,7 +191,7 @@ public abstract class GenericAdapter<VH extends GenericAdapter.ViewHolder> exten
                 }
             }
         } catch (Exception ex) {
-            Timber.e(ex);
+            Log.e(TAG, ex.toString());
         }
     }
 }

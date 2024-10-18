@@ -8,6 +8,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
 
@@ -19,13 +20,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import timber.log.Timber;
-
 import static android.content.Context.NOTIFICATION_SERVICE;
 
 public class AlarmHandler {
     public static final String INTENT_EXTRA_ALARM = "alarmIntent";
     private static final int ALARM_NOTIFICATION_ID = 0x01;
+
+    private final String TAG = getClass().getSimpleName();
 
     public void scheduleAlarms(Context context) {
         AlarmEntryReader reader = AlarmEntryReader.construct(context);
@@ -49,7 +50,7 @@ public class AlarmHandler {
     }
 
     private void setRepeatingAlarm(Context context, int dayOfWeek, Calendar nextAlarmTimestamp) {
-        Timber.d("Set repeating alarm for %s", nextAlarmTimestamp.getTime());
+        Log.d(TAG,"Set repeating alarm for " + nextAlarmTimestamp.getTime());
         PendingIntent alarmPendingIntent = getPendingAlarmIntent(context, dayOfWeek);
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmMgr.setInexactRepeating(AlarmManager.RTC_WAKEUP, nextAlarmTimestamp.getTimeInMillis(),
@@ -78,7 +79,7 @@ public class AlarmHandler {
     }
 
     public void disableAllAlarms(Context context) {
-        Timber.d("Disable all alarm handlers");
+        Log.d(TAG, "Disable all alarm handlers");
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         List<PendingIntent> pendingIntents = getWeekdaysPendingAlarmIntent(context);
 
