@@ -3,7 +3,6 @@ package com.health.openworkout.gui.utils;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.util.Log;
 
 import androidx.fragment.app.Fragment;
@@ -102,11 +101,8 @@ public class FileDialogHelper {
     }
 
     private boolean checkPermissionForReadExternalStorage() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int result = fragment.getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
-            return result == PackageManager.PERMISSION_GRANTED;
-        }
-        return false;
+        int result = fragment.getContext().checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
 
@@ -119,11 +115,8 @@ public class FileDialogHelper {
     }
 
     private boolean checkPermissionForWriteExternalStorage() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int result = fragment.getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-            return result == PackageManager.PERMISSION_GRANTED;
-        }
-        return false;
+        int result = fragment.getContext().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return result == PackageManager.PERMISSION_GRANTED;
     }
 
     private void requestPermissionForWriteExternalStorage(int requestCode) {

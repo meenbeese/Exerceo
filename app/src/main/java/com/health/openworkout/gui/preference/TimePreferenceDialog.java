@@ -1,6 +1,5 @@
 package com.health.openworkout.gui.preference;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.text.format.DateFormat;
 import android.view.View;
@@ -46,8 +45,8 @@ public class TimePreferenceDialog extends PreferenceDialogFragmentCompat {
             boolean is24hour = DateFormat.is24HourFormat(getContext());
 
             timePicker.setIs24HourView(is24hour);
-            timePicker.setCurrentHour(calendar.get(Calendar.HOUR_OF_DAY));
-            timePicker.setCurrentMinute(calendar.get(Calendar.MINUTE));
+            timePicker.setHour(calendar.get(Calendar.HOUR_OF_DAY));
+            timePicker.setMinute(calendar.get(Calendar.MINUTE));
         }
     }
 
@@ -57,13 +56,8 @@ public class TimePreferenceDialog extends PreferenceDialogFragmentCompat {
             int hours;
             int minutes;
 
-            if (Build.VERSION.SDK_INT >= 23) {
-                hours = timePicker.getHour();
-                minutes = timePicker.getMinute();
-            } else {
-                hours = timePicker.getCurrentHour();
-                minutes = timePicker.getCurrentMinute();
-            }
+            hours = timePicker.getHour();
+            minutes = timePicker.getMinute();
 
             calendar.set(Calendar.HOUR_OF_DAY, hours);
             calendar.set(Calendar.MINUTE, minutes);
