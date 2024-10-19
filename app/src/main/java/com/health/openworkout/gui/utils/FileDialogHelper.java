@@ -23,7 +23,7 @@ public class FileDialogHelper {
     public final static int REQUEST_IMPORT_FILE_DIALOG = 40;
     public final static int REQUEST_DEBUG_FILE_DIALOG = 50;
 
-    private Fragment fragment;
+    private final Fragment fragment;
 
     private String defaultFilename;
 
@@ -148,13 +148,11 @@ public class FileDialogHelper {
 
     public boolean onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
-            if (requestCode == REQUEST_IMPORT_FILE_DIALOG ||
+            return requestCode == REQUEST_IMPORT_FILE_DIALOG ||
                     requestCode == REQUEST_EXPORT_FILE_DIALOG ||
                     requestCode == REQUEST_OPEN_IMAGE_DIALOG ||
                     requestCode == REQUEST_OPEN_VIDEO_DIALOG ||
-                    requestCode == REQUEST_DEBUG_FILE_DIALOG) {
-                return true;
-            }
+                    requestCode == REQUEST_DEBUG_FILE_DIALOG;
         }
 
         return false;

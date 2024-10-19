@@ -9,7 +9,8 @@ import android.net.Uri;
 import android.os.CancellationSignal;
 import android.util.Log;
 
-import java.io.FileNotFoundException;
+import androidx.annotation.NonNull;
+
 import java.io.IOException;
 
 public class VideoProvider extends ContentProvider {
@@ -17,13 +18,9 @@ public class VideoProvider extends ContentProvider {
     private final String TAG = getClass().getSimpleName();
 
     @Override
-    public AssetFileDescriptor openAssetFile(Uri uri, String mode) throws FileNotFoundException {
+    public AssetFileDescriptor openAssetFile(Uri uri, @NonNull String mode) {
         AssetManager am = getContext().getAssets();
         String file_name = uri.getPath().substring(1);
-
-        if (file_name == null) {
-            throw new FileNotFoundException();
-        }
 
         AssetFileDescriptor afd = null;
 
@@ -37,44 +34,37 @@ public class VideoProvider extends ContentProvider {
     }
 
     @Override
-    public String getType( Uri p1 )
-    {
+    public String getType(@NonNull Uri p1) {
         return null;
     }
 
     @Override
-    public int delete( Uri p1, String p2, String[] p3 )
-    {
+    public int delete(@NonNull Uri p1, String p2, String[] p3) {
         return 0;
     }
 
     @Override
-    public Cursor query(Uri p1, String[] p2, String p3, String[] p4, String p5 )
-    {
+    public Cursor query(@NonNull Uri p1, String[] p2, String p3, String[] p4, String p5) {
         return null;
     }
 
     @Override
-    public Cursor query( Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder, CancellationSignal cancellationSignal )
-    {
+    public Cursor query(@NonNull Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder, CancellationSignal cancellationSignal) {
         return super.query( uri, projection, selection, selectionArgs, sortOrder, cancellationSignal );
     }
 
     @Override
-    public Uri insert( Uri p1, ContentValues p2 )
-    {
+    public Uri insert(@NonNull Uri p1, ContentValues p2) {
         return null;
     }
 
     @Override
-    public boolean onCreate( )
-    {
+    public boolean onCreate() {
         return false;
     }
 
     @Override
-    public int update(Uri p1, ContentValues p2, String p3, String[] p4 )
-    {
+    public int update(@NonNull Uri p1, ContentValues p2, String p3, String[] p4) {
         return 0;
     }
 }

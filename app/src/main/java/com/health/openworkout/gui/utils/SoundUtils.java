@@ -13,20 +13,20 @@ import java.util.Locale;
 public class SoundUtils {
     public enum SOUND {WORKOUT_COUNT_BEFORE_START, WORKOUT_START, WORKOUT_STOP, SESSION_COMPLETED}
 
-    private final int NUMBER_OF_SIMULTANEOUS_SOUNDS = 4;
-    private final float LEFT_VOLUME_VALUE = 1.0f;
-    private final float RIGHT_VOLUME_VALUE = 1.0f;
-    private final int MUSIC_LOOP = 0;
-    private final int SOUND_PLAY_PRIORITY = 1;
-    private final float PLAY_RATE= 1.0f;
+    private static final int NUMBER_OF_SIMULTANEOUS_SOUNDS = 4;
+    private static final float LEFT_VOLUME_VALUE = 1.0f;
+    private static final float RIGHT_VOLUME_VALUE = 1.0f;
+    private static final int MUSIC_LOOP = 0;
+    private static final int SOUND_PLAY_PRIORITY = 1;
+    private static final float PLAY_RATE = 1.0f;
 
-    private SoundPool soundPool;
+    private final SoundPool soundPool;
     private TextToSpeech ttS;
     private boolean ttsInit;
 
     private int soundIdBeforeStart, soundIdWorkoutStart, soundIdWorkoutStop, soundIdSessionCompleted;
 
-    private AssetManager assetManager;
+    private final AssetManager assetManager;
 
     private final String TAG = getClass().getSimpleName();
 
@@ -71,18 +71,10 @@ public class SoundUtils {
 
     public void playSound(SOUND sound) {
         switch (sound) {
-            case WORKOUT_COUNT_BEFORE_START:
-                soundPool.play(soundIdBeforeStart, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
-                break;
-            case WORKOUT_START:
-                soundPool.play(soundIdWorkoutStart, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
-                break;
-            case WORKOUT_STOP:
-                soundPool.play(soundIdWorkoutStop, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
-                break;
-            case SESSION_COMPLETED:
-                soundPool.play(soundIdSessionCompleted, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
-                break;
+            case WORKOUT_COUNT_BEFORE_START -> soundPool.play(soundIdBeforeStart, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
+            case WORKOUT_START -> soundPool.play(soundIdWorkoutStart, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
+            case WORKOUT_STOP -> soundPool.play(soundIdWorkoutStop, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
+            case SESSION_COMPLETED -> soundPool.play(soundIdSessionCompleted, LEFT_VOLUME_VALUE , RIGHT_VOLUME_VALUE, SOUND_PLAY_PRIORITY , MUSIC_LOOP ,PLAY_RATE);
         }
     }
 
