@@ -28,7 +28,7 @@ class SessionSettingsFragment : GenericSettingsFragment() {
         imgView = root.findViewById(R.id.imgView)
         nameView = root.findViewById(R.id.nameView)
 
-        mode = SessionSettingsFragmentArgs.fromBundle(arguments).mode
+        mode = SessionSettingsFragmentArgs.fromBundle(requireArguments()).mode
 
         return root
     }
@@ -41,7 +41,7 @@ class SessionSettingsFragment : GenericSettingsFragment() {
         when (mode) {
             SETTING_MODE.ADD -> workoutSession = WorkoutSession()
             SETTING_MODE.EDIT -> {
-                val workoutSessionId = SessionSettingsFragmentArgs.fromBundle(arguments).workoutSessionId
+                val workoutSessionId = SessionSettingsFragmentArgs.fromBundle(requireArguments()).workoutSessionId
                 workoutSession = OpenWorkout.getInstance().getWorkoutSession(workoutSessionId)
             }
         }
@@ -60,7 +60,7 @@ class SessionSettingsFragment : GenericSettingsFragment() {
 
         when (mode) {
             SETTING_MODE.ADD -> {
-                val trainingPlanId = SessionSettingsFragmentArgs.fromBundle(arguments).trainingPlanId
+                val trainingPlanId = SessionSettingsFragmentArgs.fromBundle(requireArguments()).trainingPlanId
 
                 workoutSession?.trainingPlanId = trainingPlanId
                 OpenWorkout.getInstance().insertWorkoutSession(workoutSession)
