@@ -16,8 +16,7 @@ class TimePreference @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = R.attr.preferenceStyle,
     defStyleRes: Int = defStyleAttr
-) :
-    DialogPreference(context, attrs, defStyleAttr, defStyleRes) {
+) : DialogPreference(context, attrs, defStyleAttr, defStyleRes) {
     internal var timeInMillis: Long = 0
         set(value) {
             field = value
