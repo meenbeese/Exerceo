@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -19,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.WorkoutItem;
@@ -32,12 +32,12 @@ public class WorkoutSettingsFragment extends GenericSettingsFragment {
     private WorkoutItem workoutItem;
 
     private ImageView imgView;
-    private TextView nameView;
-    private TextView descriptionView;
-    private TextView prepTimeView;
-    private TextView workoutTimeView;
-    private TextView breakTimeView;
-    private TextView repetitionCountView;
+    private MaterialTextView nameView;
+    private MaterialTextView descriptionView;
+    private MaterialTextView prepTimeView;
+    private MaterialTextView workoutTimeView;
+    private MaterialTextView breakTimeView;
+    private MaterialTextView repetitionCountView;
     private Switch timeModeView;
     private TableRow workoutTimeRow;
     private TableRow repetitionCountRow;

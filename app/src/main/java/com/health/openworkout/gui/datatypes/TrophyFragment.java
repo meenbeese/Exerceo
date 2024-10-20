@@ -5,12 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.WorkoutSession;
@@ -23,7 +23,7 @@ import java.util.TimeZone;
 
 public class TrophyFragment extends Fragment {
 
-    private TextView elapsedTimeView;
+    private MaterialTextView elapsedTimeView;
     private Button okView;
     private SoundUtils soundUtils;
 

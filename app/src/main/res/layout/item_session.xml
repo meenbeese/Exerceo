@@ -17,11 +17,11 @@
             android:layout_width="80dp"
             android:layout_height="match_parent">
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nameView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:text="MaterialTextView"
                 app:layout_constraintEnd_toEndOf="@+id/optionView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

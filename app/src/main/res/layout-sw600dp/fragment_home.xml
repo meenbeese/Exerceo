@@ -28,7 +28,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/startTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="TextView" />
+                android:text="MaterialTextView" />
 
             <ImageView
                 android:id="@+id/detailTrainingView"
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/sessionView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

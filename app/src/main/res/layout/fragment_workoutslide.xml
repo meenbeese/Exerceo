@@ -7,12 +7,12 @@
     android:layout_height="match_parent"
     tools:context=".gui.workout.WorkoutSlideFragment">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/nameView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="MaterialTextView"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.50" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/countdownView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="MaterialTextView"
         app:layout_constraintBottom_toBottomOf="@id/progressView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="parent" />
@@ -106,7 +106,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stateInfoView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -119,17 +119,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/stateInfoDetailView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="TextView"
+        android:text="MaterialTextView"
         app:layout_constraintBottom_toBottomOf="@id/countdownView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/descriptionView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -138,7 +138,7 @@
         android:layout_marginEnd="16dp"
         android:justificationMode="inter_word"
         android:singleLine="false"
-        android:text="TextView"
+        android:text="MaterialTextView"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@id/videoCardView"
         app:layout_constraintStart_toStartOf="@id/videoCardView"

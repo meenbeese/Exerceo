@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_trophy_enabled" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/infoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,12 +49,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/elapsedTimeView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:text="MaterialTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/infoView" />

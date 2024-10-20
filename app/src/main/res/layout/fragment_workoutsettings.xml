@@ -47,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_name" />
@@ -64,7 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_description" />
@@ -82,7 +82,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_preparation_time" />
@@ -99,7 +99,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_break_time" />
@@ -116,7 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_time_mode" />
@@ -133,7 +133,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_workout_time" />
@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_repetition_count" />
@@ -169,7 +169,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_video_mode" />
@@ -186,7 +186,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <TextView
+                    <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/label_video" />

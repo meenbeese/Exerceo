@@ -20,7 +20,6 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -32,6 +31,7 @@ import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.WorkoutItem;
@@ -45,18 +45,18 @@ import java.util.Calendar;
 public class WorkoutSlideFragment extends Fragment {
     private enum WORKOUT_STATE {INIT, PREPARE, START, BREAK, FINISH}
     private ConstraintLayout constraintLayout;
-    private TextView nameView;
+    private MaterialTextView nameView;
     private CardView videoCardView;
     private VideoView videoView;
     private ImageView videoImageView;
     private ImageView infoView;
-    private TextView descriptionView;
-    private TextView stateInfoView;
-    private TextView stateInfoDetailView;
+    private MaterialTextView descriptionView;
+    private MaterialTextView stateInfoView;
+    private MaterialTextView stateInfoDetailView;
     private ImageView playResumeView;
     private ScrollView scrollView;
     private TableLayout workoutOverviewView;
-    private TextView countdownView;
+    private MaterialTextView countdownView;
     private ProgressBar progressView;
     private FloatingActionButton nextWorkoutStepView;
 
@@ -407,22 +407,22 @@ public class WorkoutSlideFragment extends Fragment {
 
     private class OverviewWorkoutItemEntry extends TableRow {
         private final ImageView status;
-        private final TextView reps;
-        private final TextView name;
+        private final MaterialTextView reps;
+        private final MaterialTextView name;
 
         public OverviewWorkoutItemEntry(Context context, WorkoutItem workoutItem) {
             super(context);
 
             status = new ImageView(context);
-            reps = new TextView(context);
-            name = new TextView(context);
+            reps = new MaterialTextView(context);
+            name = new MaterialTextView(context);
 
             name.setText(workoutItem.getName());
 
             if (workoutItem.isTimeMode()) {
                 reps.setText(workoutItem.getWorkoutTime() + context.getString(R.string.seconds_unit));
             } else {
-                reps.setText(Integer.toString(workoutItem.getRepetitionCount()) + "x");
+                reps.setText(workoutItem.getRepetitionCount() + "x");
             }
             status.setPadding(0, 0, 20, 0);
             reps.setPadding(0, 0, 20, 0);

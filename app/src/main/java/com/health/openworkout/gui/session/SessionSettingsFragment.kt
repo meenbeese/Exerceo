@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 
+import com.google.android.material.textview.MaterialTextView
 import com.health.openworkout.R
 import com.health.openworkout.core.OpenWorkout
 import com.health.openworkout.core.datatypes.WorkoutSession
@@ -16,7 +16,7 @@ class SessionSettingsFragment : GenericSettingsFragment() {
     private var workoutSession: WorkoutSession? = null
 
     private var imgView: ImageView? = null
-    private var nameView: TextView? = null
+    private var nameView: MaterialTextView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,

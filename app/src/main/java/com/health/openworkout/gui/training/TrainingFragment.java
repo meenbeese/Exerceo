@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -22,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.TrainingPlan;
@@ -238,7 +238,7 @@ public class TrainingFragment extends GenericFragment {
                 .create();
         infoDialog.show();
 
-        ((TextView)infoDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
+        ((MaterialTextView)infoDialog.findViewById(android.R.id.message)).setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     @Override
@@ -266,10 +266,7 @@ public class TrainingFragment extends GenericFragment {
                 case FileDialogHelper.REQUEST_EXPORT_FILE_DIALOG:
                     packageUtils.exportTrainingPlan(exportTrainingPlan, uri);
                     break;
-
             }
-
-
         }
     }
 }

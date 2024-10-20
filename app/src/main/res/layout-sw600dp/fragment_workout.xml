@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".gui.workout.WorkoutFragment">
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/leftGuideline"
         android:layout_width="wrap_content"
@@ -49,7 +48,7 @@
         app:layout_constraintBottom_toTopOf="@+id/addFromDatabaseLayout"
         app:layout_constraintEnd_toEndOf="@+id/expandableButton">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/addTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,7 +79,7 @@
         app:layout_constraintBottom_toTopOf="@+id/expandableButton"
         app:layout_constraintEnd_toEndOf="@+id/expandableButton">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/addFromDatabaseTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

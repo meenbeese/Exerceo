@@ -11,7 +11,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +19,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.TrainingPlan;
@@ -83,7 +83,7 @@ public class SessionFragment extends GenericFragment {
             AlertDialog.Builder alert = new AlertDialog.Builder(getContext());
             alert.setTitle(getString(R.string.label_input_create_days));
             final EditText input = new EditText(getContext());
-            input.setText("3", TextView.BufferType.EDITABLE);
+            input.setText("3", MaterialTextView.BufferType.EDITABLE);
             input.setInputType(InputType.TYPE_CLASS_NUMBER);
             input.setRawInputType(Configuration.KEYBOARD_12KEY);
             alert.setView(input);

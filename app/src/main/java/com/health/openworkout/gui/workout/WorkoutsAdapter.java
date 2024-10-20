@@ -8,11 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.WorkoutItem;
@@ -109,12 +109,12 @@ public class WorkoutsAdapter extends GenericAdapter<WorkoutsAdapter.ViewHolder> 
     }
 
     static class ViewHolder extends GenericAdapter.ViewHolder {
-        TextView prepView;
+        MaterialTextView prepView;
         ImageView imgView;
-        TextView nameView;
-        TextView detailedView;
+        MaterialTextView nameView;
+        MaterialTextView detailedView;
         ImageView doneView;
-        TextView breakView;
+        MaterialTextView breakView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

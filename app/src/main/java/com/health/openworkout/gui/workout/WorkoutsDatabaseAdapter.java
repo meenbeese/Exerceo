@@ -8,12 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
 import com.health.openworkout.core.datatypes.WorkoutItem;
@@ -93,9 +93,8 @@ public class WorkoutsDatabaseAdapter extends RecyclerView.Adapter<WorkoutsDataba
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgView;
-        TextView nameView;
-        TextView detailedView;
-
+        MaterialTextView nameView;
+        MaterialTextView detailedView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -5,13 +5,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/prepView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="MaterialTextView"
         android:textSize="12sp" />
 
     <androidx.cardview.widget.CardView
@@ -53,24 +53,24 @@
                     android:scaleType="centerCrop" />
             </androidx.cardview.widget.CardView>
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/nameView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="TextView"
+                android:text="MaterialTextView"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/editView"
                 app:layout_constraintStart_toEndOf="@id/roundCardView"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/detailedView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:maxLines="3"
                 android:singleLine="false"
-                android:text="TextView"
+                android:text="MaterialTextView"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toStartOf="@+id/editView"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -111,13 +111,13 @@
 
     </androidx.cardview.widget.CardView>
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:id="@+id/breakView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:text="TextView"
+        android:text="MaterialTextView"
         android:textSize="12sp" />
 
     <View
