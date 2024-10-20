@@ -35,7 +35,7 @@ class TrophyFragment : Fragment() {
         elapsedTimeView = root.findViewById(R.id.elapsedTimeView)
         okView = root.findViewById(R.id.okView)
 
-        val workoutSessionId = TrophyFragmentArgs.fromBundle(arguments).sessionWorkoutId
+        val workoutSessionId = TrophyFragmentArgs.fromBundle(requireArguments()).sessionWorkoutId
         workoutSession = OpenWorkout.getInstance().getWorkoutSession(workoutSessionId)
 
         val elapsedCalendar = Calendar.getInstance()
