@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -24,7 +23,6 @@ import java.util.List;
 public class TrainingsDatabaseFragment extends Fragment {
     private RecyclerView trainingsView;
     private ProgressBar progressBar;
-    private Button buttonView;
 
     private List<GitHubFile> gitHubFileList;
     private TrainingDatabaseAdapter trainingDatabaseAdapter;

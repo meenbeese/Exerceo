@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation.findNavController
 
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import com.health.openworkout.R
 import com.health.openworkout.core.OpenWorkout
@@ -21,7 +21,7 @@ import java.util.TimeZone
 
 class TrophyFragment : Fragment() {
     private var elapsedTimeView: MaterialTextView? = null
-    private var okView: Button? = null
+    private var okView: MaterialButton? = null
     private var soundUtils: SoundUtils? = null
 
     private var workoutSession: WorkoutSession? = null
