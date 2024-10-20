@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Switch;
 import android.widget.TableRow;
 import android.widget.Toast;
 import android.widget.VideoView;
@@ -18,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 
 import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -38,10 +38,10 @@ public class WorkoutSettingsFragment extends GenericSettingsFragment {
     private MaterialTextView workoutTimeView;
     private MaterialTextView breakTimeView;
     private MaterialTextView repetitionCountView;
-    private Switch timeModeView;
+    private MaterialSwitch timeModeView;
     private TableRow workoutTimeRow;
     private TableRow repetitionCountRow;
-    private Switch videoModeView;
+    private MaterialSwitch videoModeView;
     private TableRow videoCardRow;
     private CardView videoCardView;
     private VideoView videoView;
