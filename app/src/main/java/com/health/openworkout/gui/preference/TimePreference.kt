@@ -31,10 +31,6 @@ class TimePreference @JvmOverloads constructor(
         return defaultTime.timeInMillis
     }
 
-    override fun getDialogLayoutResource(): Int {
-        return R.layout.preference_timepicker
-    }
-
     override fun onSetInitialValue(defaultValue: Any?) {
         timeInMillis = if (shouldPersist()) {
             getPersistedLong(timeInMillis)
@@ -47,6 +43,6 @@ class TimePreference @JvmOverloads constructor(
         val calendar = Calendar.getInstance()
         calendar.timeInMillis = timeInMillis
 
-        return (DateFormat.getTimeFormat(context).format(calendar.time))
+        return DateFormat.getTimeFormat(context).format(calendar.time)
     }
 }

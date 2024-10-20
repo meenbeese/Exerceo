@@ -198,4 +198,5 @@
     <string name="training_seven_minutes_workout_training">Seven minutes workout training</string>
     <string name="training_beginners_training">Beginners training</string>
     <string name="training_abdominal_muscle_training">Abdominal muscle training</string>
+    <string name="select_time">Select a time</string>
 </resources>
