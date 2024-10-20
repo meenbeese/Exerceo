@@ -98,7 +98,7 @@ public class OpenWorkout {
     }
 
     public User getCurrentUser() {
-        return user;
+        return user == null ? new User() : user;
     }
 
     public void printTrainingPlans() {
