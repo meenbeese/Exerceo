@@ -1,6 +1,7 @@
 package com.health.openworkout.gui.datatypes
 
 import android.content.Context
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -8,70 +9,64 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 
 import androidx.annotation.Keep
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.Navigation.findNavController
 
 import com.health.openworkout.R
 
-abstract class GenericSettingsFragment : Fragment() {
+abstract class GenericSettingsFragment : Fragment(), MenuProvider {
     @Keep
     enum class SETTING_MODE {
         EDIT,
         ADD
     }
 
-    private var mode = SETTING_MODE.EDIT
+    protected var mode = SETTING_MODE.EDIT
+        set(value) {
+            field = value
+            loadFromDatabase(value)
+        }
 
-    init {
-        setHasOptionsMenu(true)
+    protected abstract fun getTitle(): String?
+    protected abstract fun loadFromDatabase(mode: SETTING_MODE)
+    protected abstract fun saveToDatabase(mode: SETTING_MODE): Boolean
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    protected abstract val title: String?
-
-    protected abstract fun loadFromDatabase(mode: SETTING_MODE?)
-    protected abstract fun saveToDatabase(mode: SETTING_MODE?): Boolean
-
-    protected fun setMode(mode: SETTING_MODE) {
-        this.mode = mode
-        loadFromDatabase(mode)
-    }
-
-    protected fun getMode(): SETTING_MODE {
-        return mode
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fragment_menu, menu)
-
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.fragment_menu, menu)
         val editMenu = menu.findItem(R.id.edit)
-        editMenu.setVisible(false)
-
-        super.onCreateOptionsMenu(menu, inflater)
+        editMenu.isVisible = false
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(item: MenuItem): Boolean {
         // Close keyboard
         if (requireActivity().currentFocus != null) {
             val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.hideSoftInputFromWindow(requireActivity().currentFocus!!.windowToken, 0)
         }
 
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.save -> {
                 if (saveToDatabase(mode)) {
-                    Toast.makeText(context, String.format(getString(R.string.label_save_toast), title), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, String.format(getString(R.string.label_save_toast), getTitle()), Toast.LENGTH_SHORT).show()
                     findNavController(requireActivity(), R.id.nav_host_fragment).navigateUp()
                 }
-                return true
+                true
             }
-
             R.id.reset -> {
-                Toast.makeText(context, String.format(getString(R.string.label_reset_toast), title), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, String.format(getString(R.string.label_reset_toast), getTitle()), Toast.LENGTH_SHORT).show()
                 loadFromDatabase(mode)
-                return true
+                true
             }
-
-            else -> return super.onOptionsItemSelected(item)
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
