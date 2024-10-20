@@ -23,12 +23,12 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
@@ -46,7 +46,7 @@ public class WorkoutSlideFragment extends Fragment {
     private enum WORKOUT_STATE {INIT, PREPARE, START, BREAK, FINISH}
     private ConstraintLayout constraintLayout;
     private MaterialTextView nameView;
-    private CardView videoCardView;
+    private MaterialCardView videoCardView;
     private VideoView videoView;
     private ShapeableImageView videoImageView;
     private ShapeableImageView infoView;

@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.card.MaterialCardView
                 android:id="@+id/roundCardView"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -32,7 +32,7 @@
                     android:clickable="true"
                     android:foreground="?attr/selectableItemBackground"
                     android:scaleType="centerCrop" />
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
             <TableLayout
                 android:id="@+id/tableLayout"
@@ -191,7 +191,7 @@
                         android:layout_height="wrap_content"
                         android:text="@string/label_video" />
 
-                    <androidx.cardview.widget.CardView
+                    <com.google.android.material.card.MaterialCardView
                         android:id="@+id/videoCardView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -206,7 +206,7 @@
                         android:clickable="true"
                         android:focusable="true"/>
 
-                    </androidx.cardview.widget.CardView>
+                    </com.google.android.material.card.MaterialCardView>
                 </TableRow>
             </TableLayout>
 

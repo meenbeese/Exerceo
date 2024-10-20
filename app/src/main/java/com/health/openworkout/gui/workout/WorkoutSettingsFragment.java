@@ -13,9 +13,9 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.textview.MaterialTextView;
@@ -43,7 +43,7 @@ public class WorkoutSettingsFragment extends GenericSettingsFragment {
     private TableRow repetitionCountRow;
     private MaterialSwitch videoModeView;
     private TableRow videoCardRow;
-    private CardView videoCardView;
+    private MaterialCardView videoCardView;
     private VideoView videoView;
 
     private FileDialogHelper fileDialogHelper;
