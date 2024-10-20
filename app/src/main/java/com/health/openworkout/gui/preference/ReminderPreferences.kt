@@ -6,7 +6,6 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.content.pm.PackageManager
 import android.os.Bundle
 
-import androidx.fragment.app.DialogFragment
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.Preference
 import androidx.preference.Preference.SummaryProvider
@@ -16,7 +15,6 @@ import androidx.preference.SwitchPreferenceCompat
 import com.health.openworkout.R
 import com.health.openworkout.core.alarm.AlarmHandler
 import com.health.openworkout.core.alarm.ReminderBootReceiver
-import com.health.openworkout.gui.preference.TimePreferenceDialog.Companion.newInstance
 
 class ReminderPreferences : PreferenceFragmentCompat(), OnSharedPreferenceChangeListener {
     private var reminderEnable: SwitchPreferenceCompat? = null
@@ -34,15 +32,8 @@ class ReminderPreferences : PreferenceFragmentCompat(), OnSharedPreferenceChange
     }
 
     override fun onDisplayPreferenceDialog(preference: Preference) {
-        var dialogFragment: DialogFragment? = null
-
         if (preference is TimePreference) {
-            dialogFragment = newInstance(preference.getKey())
-        }
-
-        if (dialogFragment != null) {
-            dialogFragment.setTargetFragment(this, 0)
-            dialogFragment.show(parentFragmentManager, "timePreferenceDialog")
+            preference.onClick()
         } else {
             super.onDisplayPreferenceDialog(preference)
         }
