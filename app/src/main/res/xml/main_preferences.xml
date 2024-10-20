@@ -25,9 +25,4 @@
         app:icon="@drawable/ic_sound"
         app:title="@string/preference_sound" />
 
-    <Preference
-        app:key="removeAd"
-        app:icon="@drawable/ic_billing"
-        app:title="@string/preference_remove_advertisements" />
-
 </PreferenceScreen>
