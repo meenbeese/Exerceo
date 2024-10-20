@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -17,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -25,8 +25,8 @@ import com.health.openworkout.core.datatypes.User;
 import com.health.openworkout.core.datatypes.WorkoutSession;
 
 public class HomeFragment extends Fragment {
-    private ImageView startView;
-    private ImageView detailTrainingView;
+    private ShapeableImageView startView;
+    private ShapeableImageView detailTrainingView;
     private Spinner trainingNameView;
     private ProgressBar sessionProgressBar;
     private MaterialTextView sessionView;

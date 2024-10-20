@@ -27,7 +27,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="32dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

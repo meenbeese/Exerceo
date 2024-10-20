@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".gui.workout.WorkoutDatabaseFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/workoutsView"
         android:layout_width="match_parent"

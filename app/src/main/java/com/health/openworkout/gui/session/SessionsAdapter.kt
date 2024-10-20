@@ -4,8 +4,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.health.openworkout.R
 import com.health.openworkout.core.datatypes.WorkoutSession
@@ -43,7 +43,7 @@ class SessionsAdapter(
     }
 
     class ViewHolder(itemView: View) : GenericAdapter.ViewHolder(itemView) {
-        var imgView: ImageView = itemView.findViewById(R.id.imgView)
+        var imgView: ShapeableImageView = itemView.findViewById(R.id.imgView)
         var nameView: MaterialTextView = itemView.findViewById(R.id.nameView)
     }
 }

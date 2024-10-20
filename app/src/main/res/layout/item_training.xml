@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/reorderView"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -37,7 +37,7 @@
                 app:layout_constraintStart_toEndOf="@id/reorderView"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -82,7 +82,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/roundCardView" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/editView"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_edit" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/optionView"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"

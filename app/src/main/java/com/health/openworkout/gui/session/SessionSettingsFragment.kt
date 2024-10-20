@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 
+import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.textview.MaterialTextView
 import com.health.openworkout.R
 import com.health.openworkout.core.OpenWorkout
@@ -15,7 +15,7 @@ import com.health.openworkout.gui.datatypes.GenericSettingsFragment
 class SessionSettingsFragment : GenericSettingsFragment() {
     private var workoutSession: WorkoutSession? = null
 
-    private var imgView: ImageView? = null
+    private var imgView: ShapeableImageView? = null
     private var nameView: MaterialTextView? = null
 
     override fun onCreateView(

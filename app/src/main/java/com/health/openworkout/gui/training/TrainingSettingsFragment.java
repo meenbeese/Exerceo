@@ -8,11 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -26,7 +26,7 @@ import java.io.InputStream;
 public class TrainingSettingsFragment extends GenericSettingsFragment {
     private TrainingPlan trainingPlan;
 
-    private ImageView imgView;
+    private ShapeableImageView imgView;
     private MaterialTextView nameView;
 
     private FileDialogHelper fileDialogHelper;

@@ -37,7 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/videoImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -47,7 +47,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/infoView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/playPauseView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

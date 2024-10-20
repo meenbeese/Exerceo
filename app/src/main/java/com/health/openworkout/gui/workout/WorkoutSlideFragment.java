@@ -15,7 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -31,6 +30,7 @@ import androidx.navigation.Navigation;
 import androidx.preference.PreferenceManager;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -48,12 +48,12 @@ public class WorkoutSlideFragment extends Fragment {
     private MaterialTextView nameView;
     private CardView videoCardView;
     private VideoView videoView;
-    private ImageView videoImageView;
-    private ImageView infoView;
+    private ShapeableImageView videoImageView;
+    private ShapeableImageView infoView;
     private MaterialTextView descriptionView;
     private MaterialTextView stateInfoView;
     private MaterialTextView stateInfoDetailView;
-    private ImageView playResumeView;
+    private ShapeableImageView playResumeView;
     private ScrollView scrollView;
     private TableLayout workoutOverviewView;
     private MaterialTextView countdownView;
@@ -406,14 +406,14 @@ public class WorkoutSlideFragment extends Fragment {
     }
 
     private class OverviewWorkoutItemEntry extends TableRow {
-        private final ImageView status;
+        private final ShapeableImageView status;
         private final MaterialTextView reps;
         private final MaterialTextView name;
 
         public OverviewWorkoutItemEntry(Context context, WorkoutItem workoutItem) {
             super(context);
 
-            status = new ImageView(context);
+            status = new ShapeableImageView(context);
             reps = new MaterialTextView(context);
             name = new MaterialTextView(context);
 
@@ -485,21 +485,11 @@ public class WorkoutSlideFragment extends Fragment {
                     case PREPARE:
                         if (isSpeechCountdown) {
                             switch (remainingSec) {
-                                case 5:
-                                    soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_five));
-                                    break;
-                                case 4:
-                                    soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_four));
-                                    break;
-                                case 3:
-                                    soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_three));
-                                    break;
-                                case 2:
-                                    soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_two));
-                                    break;
-                                case 1:
-                                    soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_one));
-                                    break;
+                                case 5 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_five));
+                                case 4 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_four));
+                                case 3 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_three));
+                                case 2 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_two));
+                                case 1 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_one));
                             }
                         } else {
                             if ((remainingSec == 3) || (remainingSec == 2) || (remainingSec == 1)) {
@@ -512,21 +502,11 @@ public class WorkoutSlideFragment extends Fragment {
                             soundUtils.textToSpeech(getContext().getString(R.string.speak_halftime));
                         } else if (isSpeechCountdown) {
                                 switch (remainingSec) {
-                                    case 5:
-                                        soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_five));
-                                        break;
-                                    case 4:
-                                        soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_four));
-                                        break;
-                                    case 3:
-                                        soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_three));
-                                        break;
-                                    case 2:
-                                        soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_two));
-                                        break;
-                                    case 1:
-                                        soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_one));
-                                        break;
+                                    case 5 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_five));
+                                    case 4 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_four));
+                                    case 3 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_three));
+                                    case 2 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_two));
+                                    case 1 -> soundUtils.textToSpeechNoInterrupt(getContext().getString(R.string.speak_one));
                                 }
                             } else {
                                 if ((remainingSec == 3) || (remainingSec == 2) || (remainingSec == 1))
@@ -538,12 +518,8 @@ public class WorkoutSlideFragment extends Fragment {
 
             public void onFinish() {
                 switch (workoutState) {
-                    case PREPARE:
-                        soundUtils.playSound(SoundUtils.SOUND.WORKOUT_START);
-                        break;
-                    case START:
-                        soundUtils.playSound(SoundUtils.SOUND.WORKOUT_STOP);
-                        break;
+                    case PREPARE -> soundUtils.playSound(SoundUtils.SOUND.WORKOUT_START);
+                    case START -> soundUtils.playSound(SoundUtils.SOUND.WORKOUT_STOP);
                 }
 
                 nextWorkoutState();

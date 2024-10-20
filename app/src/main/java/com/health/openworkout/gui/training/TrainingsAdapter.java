@@ -7,11 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -95,12 +95,8 @@ public class TrainingsAdapter extends GenericAdapter<TrainingsAdapter.ViewHolder
         holder.detailedView.setText(String.format(context.getString(R.string.label_session_size_completed), trainingPlan.finishedSessionSize(), trainingPlan.getWorkoutSessionSize()));
 
         switch (getMode()) {
-            case VIEW:
-                holder.trophyView.setVisibility(View.VISIBLE);
-                break;
-            case EDIT:
-                holder.trophyView.setVisibility(View.GONE);
-                break;
+            case VIEW -> holder.trophyView.setVisibility(View.VISIBLE);
+            case EDIT -> holder.trophyView.setVisibility(View.GONE);
         }
     }
 
@@ -115,7 +111,7 @@ public class TrainingsAdapter extends GenericAdapter<TrainingsAdapter.ViewHolder
     }
 
     static class ViewHolder extends GenericAdapter.ViewHolder {
-        ImageView imgView;
+        ShapeableImageView imgView;
         MaterialTextView nameView;
         MaterialTextView detailedView;
         MaterialTextView trophyView;
@@ -132,6 +128,4 @@ public class TrainingsAdapter extends GenericAdapter<TrainingsAdapter.ViewHolder
             setPublishVisible(true);
         }
     }
-
-
 }

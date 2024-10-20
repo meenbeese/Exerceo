@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TableRow;
 import android.widget.Toast;
@@ -18,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -31,7 +31,7 @@ import java.io.InputStream;
 public class WorkoutSettingsFragment extends GenericSettingsFragment {
     private WorkoutItem workoutItem;
 
-    private ImageView imgView;
+    private ShapeableImageView imgView;
     private MaterialTextView nameView;
     private MaterialTextView descriptionView;
     private MaterialTextView prepTimeView;

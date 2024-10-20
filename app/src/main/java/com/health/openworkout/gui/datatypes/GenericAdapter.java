@@ -6,12 +6,12 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.health.openworkout.R;
 
 import java.lang.reflect.Field;
@@ -92,9 +92,9 @@ public abstract class GenericAdapter<VH extends GenericAdapter.ViewHolder> exten
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements PopupMenu.OnMenuItemClickListener {
-        ImageView reorderView;
-        ImageView optionView;
-        ImageView editView;
+        ShapeableImageView reorderView;
+        ShapeableImageView optionView;
+        ShapeableImageView editView;
         PopupMenu popupMenu;
 
         public ViewHolder(@NonNull View itemView) {

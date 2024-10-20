@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".gui.home.HomeFragment">
 
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/startView"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -53,7 +53,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgGoalView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -67,7 +67,7 @@
                 android:layout_gravity="center_vertical"
                 android:text="MaterialTextView" />
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/detailTrainingView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +80,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgSessionView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/imgAvatarView"
                 android:layout_width="30dp"
                 android:layout_height="30dp"

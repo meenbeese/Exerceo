@@ -7,12 +7,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.android.material.textview.MaterialTextView;
 import com.health.openworkout.R;
 import com.health.openworkout.core.OpenWorkout;
@@ -92,7 +92,7 @@ public class WorkoutsDatabaseAdapter extends RecyclerView.Adapter<WorkoutsDataba
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgView;
+        ShapeableImageView imgView;
         MaterialTextView nameView;
         MaterialTextView detailedView;
 
