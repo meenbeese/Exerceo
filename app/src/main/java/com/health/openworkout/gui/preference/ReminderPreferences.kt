@@ -60,14 +60,14 @@ class ReminderPreferences : PreferenceFragmentCompat(), OnSharedPreferenceChange
         val alarmHandler = AlarmHandler()
 
         if (reminderEnable!!.isChecked) {
-            alarmHandler.scheduleAlarms(activity)
+            alarmHandler.scheduleAlarms(requireActivity())
 
             pm.setComponentEnabledSetting(
                 receiver, PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
                 PackageManager.DONT_KILL_APP
             )
         } else {
-            alarmHandler.disableAllAlarms(activity)
+            alarmHandler.disableAllAlarms(requireActivity())
 
             pm.setComponentEnabledSetting(
                 receiver, PackageManager.COMPONENT_ENABLED_STATE_DISABLED,

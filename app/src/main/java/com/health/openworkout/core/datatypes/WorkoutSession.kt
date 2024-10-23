@@ -35,7 +35,7 @@ open class WorkoutSession : Comparable<WorkoutSession>, Cloneable {
         workoutItems = ArrayList()
     }
 
-    override fun clone(): WorkoutSession {
+    public override fun clone(): WorkoutSession {
         val clone: WorkoutSession
         try {
             clone = super.clone() as WorkoutSession
