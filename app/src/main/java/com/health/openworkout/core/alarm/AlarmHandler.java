@@ -43,7 +43,7 @@ public class AlarmHandler {
     }
 
     private void enableAlarm(Context context, AlarmEntry alarmEntry) {
-        int dayOfWeek = alarmEntry.getDayOfWeek();
+        int dayOfWeek = alarmEntry.dayOfWeek;
         Calendar nextAlarmTimestamp = alarmEntry.getNextTimestamp();
 
         setRepeatingAlarm(context, dayOfWeek, nextAlarmTimestamp);
