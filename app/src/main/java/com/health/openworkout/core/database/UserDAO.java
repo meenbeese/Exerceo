@@ -22,7 +22,7 @@ public interface UserDAO {
     void delete(User user);
 
     @Query("SELECT * FROM User WHERE userId=:userId")
-    User get(long userId);
+    User getSome(long userId);
 
     @Query("SELECT * FROM User")
     List<User> getAll();

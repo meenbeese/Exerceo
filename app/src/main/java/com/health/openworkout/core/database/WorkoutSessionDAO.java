@@ -25,7 +25,7 @@ public interface WorkoutSessionDAO {
     void deleteAll(long trainingPlanId);
 
     @Query("SELECT * FROM WorkoutSession WHERE workoutSessionId=:workoutSessionId")
-    WorkoutSession get(long workoutSessionId);
+    WorkoutSession getSome(long workoutSessionId);
 
     @Query("SELECT * FROM WorkoutSession WHERE trainingPlanId = :trainingPlanId ORDER BY orderNr")
     List<WorkoutSession> getAll(long trainingPlanId);

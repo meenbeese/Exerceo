@@ -22,7 +22,7 @@ public interface TrainingPlanDAO {
     void delete(TrainingPlan trainingPlan);
 
     @Query("SELECT * FROM TrainingPlan WHERE trainingPlanId=:trainingPlanId")
-    TrainingPlan get(long trainingPlanId);
+    TrainingPlan getSome(long trainingPlanId);
 
     @Query("SELECT * FROM TrainingPlan ORDER BY orderNr")
     List<TrainingPlan> getAll();

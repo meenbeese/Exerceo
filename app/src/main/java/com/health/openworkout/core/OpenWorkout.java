@@ -132,7 +132,7 @@ public class OpenWorkout {
     }
 
     public TrainingPlan getTrainingPlan(long trainingPlanId) {
-        TrainingPlan singleTrainingPlan = appDB.trainingPlanDAO().get(trainingPlanId);
+        TrainingPlan singleTrainingPlan = appDB.trainingPlanDAO().getSome(trainingPlanId);
 
         if (singleTrainingPlan != null) {
             List<WorkoutSession> workoutSessionList = appDB.workoutSessionDAO().getAll(singleTrainingPlan.getTrainingPlanId());
@@ -148,7 +148,7 @@ public class OpenWorkout {
     }
 
     public WorkoutSession getWorkoutSession(long workoutSessionId) {
-        WorkoutSession singleWorkoutSession = appDB.workoutSessionDAO().get(workoutSessionId);
+        WorkoutSession singleWorkoutSession = appDB.workoutSessionDAO().getSome(workoutSessionId);
 
         List<WorkoutItem> workoutItemList = appDB.workoutItemDAO().getAll(singleWorkoutSession.workoutSessionId);
         singleWorkoutSession.setWorkoutItems(workoutItemList);
@@ -157,7 +157,7 @@ public class OpenWorkout {
     }
 
     public WorkoutItem getWorkoutItem(long workoutItemId) {
-        return appDB.workoutItemDAO().get(workoutItemId);
+        return appDB.workoutItemDAO().getSome(workoutItemId);
     }
 
     public List<WorkoutItem> getAllUniqueWorkoutItems() {

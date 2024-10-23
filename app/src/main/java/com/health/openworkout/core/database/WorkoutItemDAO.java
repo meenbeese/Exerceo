@@ -31,7 +31,7 @@ public interface WorkoutItemDAO {
     void deleteAll(long workoutSessionId);
 
     @Query("SELECT * FROM WorkoutItem WHERE workoutItemId=:workoutItemId")
-    WorkoutItem get(long workoutItemId);
+    WorkoutItem getSome(long workoutItemId);
 
     @Query("SELECT * FROM WorkoutItem WHERE workoutSessionId = :workoutSessionId ORDER BY orderNr")
     List<WorkoutItem> getAll(long workoutSessionId);
