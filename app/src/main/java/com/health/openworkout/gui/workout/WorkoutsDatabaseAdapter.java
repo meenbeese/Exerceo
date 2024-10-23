@@ -60,7 +60,7 @@ public class WorkoutsDatabaseAdapter extends RecyclerView.Adapter<WorkoutsDataba
             } else {
 
                 String subFolder;
-                if (OpenWorkout.getInstance().getCurrentUser().isMale()) {
+                if (OpenWorkout.getInstance().getCurrentUser().isMale) {
                     subFolder = "male";
                 } else {
                     subFolder = "female";

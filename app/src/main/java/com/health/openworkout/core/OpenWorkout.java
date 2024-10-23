@@ -90,7 +90,7 @@ public class OpenWorkout {
             appDB.workoutItemDAO().insertAll(workoutFactory.getAllWorkoutItems());
 
             user = new User();
-            user.setTrainingsPlanId(trainingPlanId);
+            user.trainingsPlanId = trainingPlanId;
             appDB.userDAO().insert(user);
         }
 

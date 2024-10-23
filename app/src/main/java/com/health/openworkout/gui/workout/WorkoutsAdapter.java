@@ -69,7 +69,7 @@ public class WorkoutsAdapter extends GenericAdapter<WorkoutsAdapter.ViewHolder> 
                 holder.imgView.setImageURI(Uri.parse(workoutItem.getImagePath()));
             } else {
                 String subFolder;
-                if (OpenWorkout.getInstance().getCurrentUser().isMale()) {
+                if (OpenWorkout.getInstance().getCurrentUser().isMale) {
                     subFolder = "male";
                 } else {
                     subFolder = "female";

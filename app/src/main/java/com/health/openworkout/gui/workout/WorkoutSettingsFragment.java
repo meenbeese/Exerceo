@@ -133,7 +133,7 @@ public class WorkoutSettingsFragment extends GenericSettingsFragment {
                 imgView.setImageURI(Uri.parse(workoutItem.getImagePath()));
             } else {
                 String subFolder;
-                if (OpenWorkout.getInstance().getCurrentUser().isMale()) {
+                if (OpenWorkout.getInstance().getCurrentUser().isMale) {
                     subFolder = "male";
                 } else {
                     subFolder = "female";
@@ -156,7 +156,7 @@ public class WorkoutSettingsFragment extends GenericSettingsFragment {
             if (workoutItem.isVideoPathExternal()) {
                 videoView.setVideoURI(Uri.parse(workoutItem.getVideoPath()));
             } else {
-                if (OpenWorkout.getInstance().getCurrentUser().isMale()) {
+                if (OpenWorkout.getInstance().getCurrentUser().isMale) {
                     videoView.setVideoPath("content://com.health.openworkout.videoprovider/video/male/" + workoutItem.getVideoPath());
                 } else {
                     videoView.setVideoPath("content://com.health.openworkout.videoprovider/video/female/" + workoutItem.getVideoPath());

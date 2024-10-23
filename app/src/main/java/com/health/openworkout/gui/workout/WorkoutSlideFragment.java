@@ -243,7 +243,7 @@ public class WorkoutSlideFragment extends Fragment {
                 if (nextWorkoutItem.isVideoPathExternal()) {
                     videoView.setVideoURI(Uri.parse(nextWorkoutItem.getVideoPath()));
                 } else {
-                    if (OpenWorkout.getInstance().getCurrentUser().isMale()) {
+                    if (OpenWorkout.getInstance().getCurrentUser().isMale) {
                         videoView.setVideoPath("content://com.health.openworkout.videoprovider/video/male/" + nextWorkoutItem.getVideoPath());
                     } else {
                         videoView.setVideoPath("content://com.health.openworkout.videoprovider/video/female/" + nextWorkoutItem.getVideoPath());
@@ -266,7 +266,7 @@ public class WorkoutSlideFragment extends Fragment {
                     videoImageView.setImageURI(Uri.parse(nextWorkoutItem.getImagePath()));
                 } else {
                     String subFolder;
-                    if (OpenWorkout.getInstance().getCurrentUser().isMale()) {
+                    if (OpenWorkout.getInstance().getCurrentUser().isMale) {
                         subFolder = "male";
                     } else {
                         subFolder = "female";

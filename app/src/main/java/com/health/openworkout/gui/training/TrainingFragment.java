@@ -179,11 +179,11 @@ public class TrainingFragment extends GenericFragment {
     @Override
     protected void onDeleteCallback(int position) {
         User user = OpenWorkout.getInstance().getCurrentUser();
-        long userTrainingPlanId = user.getTrainingsPlanId();
+        long userTrainingPlanId = user.trainingsPlanId;
         TrainingPlan trainingPlanToBeDelete = trainingPlanList.get(position);
 
         if (userTrainingPlanId == trainingPlanToBeDelete.getTrainingPlanId()) {
-            user.setTrainingsPlanId(-1);
+            user.trainingsPlanId = -1;
             OpenWorkout.getInstance().updateUser(user);
         }
 
